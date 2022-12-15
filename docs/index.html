@@ -8,7 +8,7 @@
 
 <meta name="author" content="Timothée Giraud">
 
-<title>Faire des carte avec le logiciel libre R</title>
+<title>Faire des cartes avec le logiciel libre R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,15 +101,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table des matières</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">1</span>  Introduction</a></li>
+  <li><a href="#préparation-des-données" id="toc-préparation-des-données" class="nav-link" data-scroll-target="#préparation-des-données"><span class="toc-section-number">2</span>  Préparation des données</a>
+  <ul class="collapse">
+  <li><a href="#téléchargement-des-données" id="toc-téléchargement-des-données" class="nav-link" data-scroll-target="#téléchargement-des-données"><span class="toc-section-number">2.1</span>  Téléchargement des données</a></li>
+  <li><a href="#import-des-données" id="toc-import-des-données" class="nav-link" data-scroll-target="#import-des-données"><span class="toc-section-number">2.2</span>  Import des données</a></li>
+  <li><a href="#nettoyage" id="toc-nettoyage" class="nav-link" data-scroll-target="#nettoyage"><span class="toc-section-number">2.3</span>  Nettoyage</a></li>
+  </ul></li>
+  <li><a href="#analyses" id="toc-analyses" class="nav-link" data-scroll-target="#analyses"><span class="toc-section-number">3</span>  Analyses</a>
+  <ul class="collapse">
+  <li><a href="#analyse-des-durées-distances-et-vitesses" id="toc-analyse-des-durées-distances-et-vitesses" class="nav-link" data-scroll-target="#analyse-des-durées-distances-et-vitesses"><span class="toc-section-number">3.1</span>  Analyse des durées, distances et vitesses</a></li>
+  <li><a href="#zoom-sur-la-haute-garonne" id="toc-zoom-sur-la-haute-garonne" class="nav-link" data-scroll-target="#zoom-sur-la-haute-garonne"><span class="toc-section-number">3.2</span>  Zoom sur la Haute-Garonne</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Faire des carte avec le logiciel libre R</h1>
+<h1 class="title">Faire des cartes avec le logiciel libre R</h1>
 <p class="subtitle lead">Journée d’étude ‘La boîte à outils de cartographie et de géovisualisation de données : regards croisés de chercheurs’</p>
 </div>
 
@@ -146,8 +165,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
+<section id="introduction" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
 <p>Historique et principes de l’outil utilisé</p>
 <p>Fonctionnalités principales</p>
 <p>Usages actuels (montrer quelques supers exemples)</p>
@@ -158,195 +177,427 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Usages potentiels qu’on a pas eu le temps d’explorer</p>
 <p>Bilan personnel de l’outil (forces et limites) dans l’offre actuelle</p>
 </section>
-<section id="préparation-des-données" class="level2">
-<h2 class="anchored" data-anchor-id="préparation-des-données">Préparation des données</h2>
-<section id="téléchargement-des-données" class="level3">
-<h3 class="anchored" data-anchor-id="téléchargement-des-données">Téléchargement des données</h3>
-<div class="cell">
+<section id="préparation-des-données" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="préparation-des-données"><span class="header-section-number">2</span> Préparation des données</h2>
+<section id="téléchargement-des-données" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="téléchargement-des-données"><span class="header-section-number">2.1</span> Téléchargement des données</h3>
+<div class="cell" data-hash="index_cache/html/download_bd319f3347bed7a71e2017b5eb1a0e5c">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"data-raw"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># cov_2022_10 &lt;- "https://www.data.gouv.fr/fr/datasets/r/80b38046-8166-49fd-bbee-fc0ba9612a88"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># download.file(cov_2022_10, destfile = "data-raw/cov_2022_10.csv")</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cov_2022_09 <span class="ot">&lt;-</span> <span class="st">"https://www.data.gouv.fr/fr/datasets/r/513862ee-8e8e-426b-9b67-7a4e39ab253a"</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(cov_2022_09, <span class="at">destfile =</span> <span class="st">"data-raw/cov_2022_09.csv"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>cov_2022_09 <span class="ot">&lt;-</span> <span class="st">"https://www.data.gouv.fr/fr/datasets/r/513862ee-8e8e-426b-9b67-7a4e39ab253a"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(cov_2022_09, <span class="at">destfile =</span> <span class="st">"data-raw/cov_2022_09.csv"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="import-des-données" class="level3">
-<h3 class="anchored" data-anchor-id="import-des-données">Import des données</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cov_raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"data-raw/cov_2022_10.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="import-des-données" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="import-des-données"><span class="header-section-number">2.2</span> Import des données</h3>
+<div class="cell" data-hash="index_cache/html/import_59681cbf6c0f7ea61d9284639b9981d7">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cov_raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"data-raw/cov_2022_10.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>cov <span class="ot">&lt;-</span> cov_raw</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># head(cov_raw)</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="index_cache/html/nada_e0ffef14e09076ffb261ec017c1e9c0c">
+
 </div>
 </section>
-<section id="selection" class="level3">
-<h3 class="anchored" data-anchor-id="selection">Selection</h3>
-<p>Sélection des covoit depuis l’Occitanie vers l’Occitanie</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># occitanie &lt;- c("46", "12", "48", "30", </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                "34", "81", "82", "32", </span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                "31", "65", "09", "66", "11")</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># length(occitanie)</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cov &lt;- cov_raw[</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   cov_raw$journey_start_department %in% occitanie &amp; </span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     cov_raw$journey_end_department %in% occitanie, </span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ]</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># nrow(cov)</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>cov <span class="ot">&lt;-</span> cov_raw</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="nettoyage" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="nettoyage"><span class="header-section-number">2.3</span> Nettoyage</h3>
+<p>Suppression des trajets sans durée ni distance renseignées</p>
+<div class="cell" data-hash="index_cache/html/clean_15acc346743900a3a0851ed9835ba586">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cov <span class="ot">&lt;-</span> cov_raw[cov_raw<span class="sc">$</span>journey_distance <span class="sc">!=</span> <span class="dv">0</span> <span class="sc">&amp;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                 cov_raw<span class="sc">$</span>journey_duration <span class="sc">!=</span> <span class="dv">0</span>, ]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="analyse" class="level2">
-<h2 class="anchored" data-anchor-id="analyse">Analyse</h2>
-<section id="analyse-des-durées-distances-et-vitesses" class="level3">
-<h3 class="anchored" data-anchor-id="analyse-des-durées-distances-et-vitesses">Analyse des durées, distances et vitesses</h3>
-<p>Calcul des indicateurs, gestion des unités de mesure</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>duree <span class="ot">&lt;-</span> cov<span class="sc">$</span>journey_duration</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>distance <span class="ot">&lt;-</span> cov<span class="sc">$</span>journey_distance</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(units)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="analyses" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="analyses"><span class="header-section-number">3</span> Analyses</h2>
+<section id="analyse-des-durées-distances-et-vitesses" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="analyse-des-durées-distances-et-vitesses"><span class="header-section-number">3.1</span> Analyse des durées, distances et vitesses</h3>
+<section id="calcul-des-indicateurs-gestion-des-unités-de-mesure" class="level4" data-number="3.1.1">
+<h4 data-number="3.1.1" class="anchored" data-anchor-id="calcul-des-indicateurs-gestion-des-unités-de-mesure"><span class="header-section-number">3.1.1</span> Calcul des indicateurs, gestion des unités de mesure</h4>
+<div class="cell" data-hash="index_cache/html/indicators_1ecd37fc9c51c9e87c3a3c46a1821672">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>duree <span class="ot">&lt;-</span> cov<span class="sc">$</span>journey_duration</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>distance <span class="ot">&lt;-</span> cov<span class="sc">$</span>journey_distance</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(units)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(distance) <span class="ot">&lt;-</span> <span class="st">"m"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(duree) <span class="ot">&lt;-</span> <span class="st">"min"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>distance <span class="ot">&lt;-</span> <span class="fu">set_units</span>(distance, <span class="st">"km"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>duree <span class="ot">&lt;-</span> <span class="fu">set_units</span>(duree, <span class="st">"h"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>vitesse <span class="ot">&lt;-</span> distance <span class="sc">/</span> duree</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="représentations" class="level4" data-number="3.1.2">
+<h4 data-number="3.1.2" class="anchored" data-anchor-id="représentations"><span class="header-section-number">3.1.2</span> Représentations</h4>
+<div class="cell" data-hash="index_cache/html/table_2f44fa2733c49aef22d0bfdd90b5fe11">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">summary</span>(duree), </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summary</span>(distance), </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summary</span>(vitesse)), </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="fu">c</span>(<span class="st">"Durée (h)"</span>, <span class="st">"Distance (km)"</span>, <span class="st">"Vitesse (km/h)"</span>), </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summary_table, <span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Min.</th>
+<th style="text-align: right;">1st Qu.</th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">3rd Qu.</th>
+<th style="text-align: right;">Max.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Durée (h)</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">11.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Distance (km)</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">9.9</td>
+<td style="text-align: right;">19.9</td>
+<td style="text-align: right;">24.7</td>
+<td style="text-align: right;">32.9</td>
+<td style="text-align: right;">1038.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Vitesse (km/h)</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">33.0</td>
+<td style="text-align: right;">44.3</td>
+<td style="text-align: right;">46.4</td>
+<td style="text-align: right;">58.0</td>
+<td style="text-align: right;">129.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell" data-hash="index_cache/html/histograms_4b0d18bf116ccb934af608fc3fd11990">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(duree)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(distance)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(vitesse)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/histograms-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/histograms-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/histograms-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="index_cache/html/plot_dd_486d51ac10767fbe0f3a04020a45c220">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> distance, <span class="at">y =</span> duree,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre durée et distance des trajets"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkred"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/plot_dd-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="index_cache/html/plot_dv_140dd01a1446d3ca7ce026ad0e03f9a5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> distance, <span class="at">y =</span> vitesse,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre vitesse et distance des trajets"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkblue"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">80</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> .<span class="dv">5</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">110</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> .<span class="dv">5</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/plot_dv-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="zoom-sur-la-haute-garonne" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="zoom-sur-la-haute-garonne"><span class="header-section-number">3.2</span> Zoom sur la Haute-Garonne</h3>
+<section id="sélection-des-données" class="level4" data-number="3.2.1">
+<h4 data-number="3.2.1" class="anchored" data-anchor-id="sélection-des-données"><span class="header-section-number">3.2.1</span> Sélection des données</h4>
+<p>Nous sélectionnons les trajets depuis ou vers la Haute-Garonne (31) de moins de 100 km.</p>
+<div class="cell" data-hash="index_cache/html/selecta31_8d494b1aabaff386ff2195c2cab016f1">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cov31 <span class="ot">&lt;-</span> cov[(cov<span class="sc">$</span>journey_start_department <span class="sc">%in%</span> <span class="dv">31</span> <span class="sc">|</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>               cov<span class="sc">$</span>journey_end_department <span class="sc">%in%</span> <span class="dv">31</span>) <span class="sc">&amp;</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>               cov<span class="sc">$</span>journey_distance <span class="sc">&lt;=</span> <span class="dv">100000</span> , ]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="calcul-des-indicateurs-gestion-des-unités-de-mesure-1" class="level4" data-number="3.2.2">
+<h4 data-number="3.2.2" class="anchored" data-anchor-id="calcul-des-indicateurs-gestion-des-unités-de-mesure-1"><span class="header-section-number">3.2.2</span> Calcul des indicateurs, gestion des unités de mesure</h4>
+<div class="cell" data-hash="index_cache/html/indicators31_b19c43cbe2820b9d0219bc3fff8a913c">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>duree <span class="ot">&lt;-</span> cov31<span class="sc">$</span>journey_duration</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>distance <span class="ot">&lt;-</span> cov31<span class="sc">$</span>journey_distance</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(units)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(distance) <span class="ot">&lt;-</span> <span class="st">"m"</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(duree) <span class="ot">&lt;-</span> <span class="st">"min"</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>distance <span class="ot">&lt;-</span> <span class="fu">set_units</span>(distance, <span class="st">"km"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>vitesse <span class="ot">&lt;-</span> distance <span class="sc">/</span> duree</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>vitesse <span class="ot">&lt;-</span> <span class="fu">set_units</span>(vitesse, <span class="st">"km/h"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="représentations-1" class="level4" data-number="3.2.3">
+<h4 data-number="3.2.3" class="anchored" data-anchor-id="représentations-1"><span class="header-section-number">3.2.3</span> Représentations</h4>
+<div class="cell" data-hash="index_cache/html/table31_190616a3bc756988a9c2b2f6fc6c4088">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">summary</span>(duree), </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summary</span>(distance), </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summary</span>(vitesse)), </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="fu">c</span>(<span class="st">"Durée (m)"</span>, <span class="st">"Distance (km)"</span>, <span class="st">"Vitesse (km/h)"</span>), </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summary_table, <span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Min.</th>
+<th style="text-align: right;">1st Qu.</th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">3rd Qu.</th>
+<th style="text-align: right;">Max.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Durée (m)</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">18.0</td>
+<td style="text-align: right;">24.0</td>
+<td style="text-align: right;">27.0</td>
+<td style="text-align: right;">35.0</td>
+<td style="text-align: right;">81.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Distance (km)</td>
+<td style="text-align: right;">1.9</td>
+<td style="text-align: right;">11.5</td>
+<td style="text-align: right;">19.0</td>
+<td style="text-align: right;">27.7</td>
+<td style="text-align: right;">38.4</td>
+<td style="text-align: right;">95.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Vitesse (km/h)</td>
+<td style="text-align: right;">14.1</td>
+<td style="text-align: right;">36.9</td>
+<td style="text-align: right;">50.1</td>
+<td style="text-align: right;">55.0</td>
+<td style="text-align: right;">74.5</td>
+<td style="text-align: right;">98.9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell" data-hash="index_cache/html/histograms31_e55e58e3ca70275302887822c01e1403">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(duree, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">1</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(distance, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">1</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(vitesse, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">1</span>))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/histograms31-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/histograms31-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/histograms31-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="index_cache/html/plot_dd31_e5b27defe5a72ae96aa24826500e3bd1">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> distance, <span class="at">y =</span> duree,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre durée et distance des trajets"</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkred"</span>) </span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/plot_dd31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="index_cache/html/plot_dv31_3f87be961f4731820334a690d7c93fbc">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> distance, <span class="at">y =</span> vitesse,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre vitesse et distance des trajets"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkblue"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/plot_dv31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="récupération-de-trajets-théoriques" class="level4" data-number="3.2.4">
+<h4 data-number="3.2.4" class="anchored" data-anchor-id="récupération-de-trajets-théoriques"><span class="header-section-number">3.2.4</span> Récupération de trajets théoriques</h4>
+<p>Nous utilisons le package osrm.</p>
+<p>Cette fonction est utile pour demander une grande quantité de routes.<br>
+Elle nécessite d’avoir accès à un serveur OSRM.</p>
+<div class="cell" data-hash="index_cache/html/nadapar_b4c0fd833a2ab3c79c042ae6ab83c1f6">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>get_routes <span class="ot">&lt;-</span> <span class="cf">function</span>(x, </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">srcX =</span> <span class="st">"srcx"</span>, <span class="at">srcY =</span> <span class="st">"srcy"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">dstX =</span> <span class="st">"dstx"</span>, <span class="at">dstY =</span> <span class="st">"dsty"</span>, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ncl =</span> <span class="dv">5</span>){</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  ny <span class="ot">&lt;-</span> <span class="fu">nrow</span>(x)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  sequence <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">1</span>, ny, <span class="dv">500</span>), ny <span class="sc">+</span> <span class="dv">1</span>))</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  lseq <span class="ot">&lt;-</span> <span class="fu">length</span>(sequence) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  ml <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>  (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>lseq) {</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    ml[[i]] <span class="ot">&lt;-</span> x[(sequence[i])<span class="sc">:</span>(sequence[i <span class="sc">+</span> <span class="dv">1</span>] <span class="sc">-</span> <span class="dv">1</span>),</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">c</span>(srcX, srcY, dstX, dstY)]</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(ncl)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  doParallel<span class="sc">::</span><span class="fu">registerDoParallel</span>(cl,)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  roads <span class="ot">&lt;-</span> foreach<span class="sc">::</span><span class="st">`</span><span class="at">%dopar%</span><span class="st">`</span>(</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    foreach<span class="sc">::</span><span class="fu">foreach</span>(</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">ml =</span> ml,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">.packages =</span> <span class="fu">c</span>(<span class="st">"osrm"</span>, <span class="st">"sf"</span>),</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">.combine =</span> rbind,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">.inorder =</span> <span class="cn">FALSE</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>      l <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="fu">nrow</span>(ml))</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>( i <span class="cf">in</span> <span class="fu">seq_along</span>(l)){</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        l[[i]] <span class="ot">&lt;-</span> <span class="fu">osrmRoute</span>(<span class="at">src =</span> ml[i, <span class="fu">c</span>(srcX, srcY)], </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>                            <span class="at">dst =</span> ml[i, <span class="fu">c</span>(dstX, dstY)], </span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>                            <span class="at">osrm.server =</span> <span class="st">"http://0.0.0.0:5000/"</span>,</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>                            <span class="at">osrm.profile =</span> <span class="st">"car"</span>,</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>                            <span class="at">overview =</span> <span class="st">"full"</span>)</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>      l <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, l)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>      l</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>  parallel<span class="sc">::</span><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>  roads</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pour la réutilisation nous enregistrons les routes</p>
+<div class="cell" data-hash="index_cache/html/nadagetroads_92cc5c00983ebe9466205b52eb41e292">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">get_routes</span>(<span class="at">x =</span> cov31, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">srcX =</span> <span class="st">"journey_start_lon"</span>, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">srcY =</span> <span class="st">"journey_start_lat"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dstX =</span> <span class="st">"journey_end_lon"</span>, </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dstY =</span> <span class="st">"journey_end_lat"</span>, </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ncl =</span> <span class="dv">7</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(<span class="at">obj =</span> roads, <span class="at">dsn =</span> <span class="st">"data/road.gpkg"</span>, <span class="at">layer =</span> <span class="st">"road"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="nettoyage-1" class="level4" data-number="3.2.5">
+<h4 data-number="3.2.5" class="anchored" data-anchor-id="nettoyage-1"><span class="header-section-number">3.2.5</span> Nettoyage</h4>
+<div class="cell" data-hash="index_cache/html/importroads_33d8851942476b534a999877b81d2e9a">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>road_raw <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/road.gpkg"</span>, <span class="at">layer =</span> <span class="st">"road"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `road' from data source 
+  `/home/tim/Documents/prz/JEGeovizRennes_R_2022/data/road.gpkg' 
+  using driver `GPKG'
+Simple feature collection with 10548 features and 4 fields
+Geometry type: LINESTRING
+Dimension:     XY
+Bounding box:  xmin: 0.02145 ymin: 42.91866 xmax: 2.37882 ymax: 44.16299
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+</div>
+</section>
+<section id="comparaison" class="level4" data-number="3.2.6">
+<h4 data-number="3.2.6" class="anchored" data-anchor-id="comparaison"><span class="header-section-number">3.2.6</span> Comparaison</h4>
+<div class="cell" data-hash="index_cache/html/graphroadsosrm_f58c1681928f3a392a069b7611142b5b">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> road_raw</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(roads<span class="sc">$</span>duration) <span class="ot">&lt;-</span> <span class="st">"min"</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(roads<span class="sc">$</span>distance) <span class="ot">&lt;-</span> <span class="st">"km"</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(duree, <span class="fu">round</span>(roads<span class="sc">$</span>duration,<span class="dv">2</span>), <span class="at">asp =</span> <span class="dv">1</span>, </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">5</span>, <span class="at">col =</span> <span class="st">"white"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg =</span> <span class="st">"darkred"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">90</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">90</span>))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/graphroadsosrm-1.png" class="img-fluid" width="480"></p>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(distance, roads<span class="sc">$</span>distance, <span class="at">asp =</span> <span class="dv">1</span>, </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">5</span>, <span class="at">col =</span> <span class="st">"white"</span>, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg =</span> <span class="st">"darkblue"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>),</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>))</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/graphroadsosrm-2.png" class="img-fluid" width="480"></p>
+</div>
+</div>
+</section>
+<section id="carto" class="level4" data-number="3.2.7">
+<h4 data-number="3.2.7" class="anchored" data-anchor-id="carto"><span class="header-section-number">3.2.7</span> Carto</h4>
+<p>Agrégation des tronçons de route</p>
+<div class="cell" data-hash="index_cache/html/aggrega_cfacbe99a1eee6a4ba20a9c2561f8a37">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(roads, <span class="st">"EPSG:3857"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stplanr)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>roads<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>roads_n <span class="ot">&lt;-</span> <span class="fu">overline</span>(<span class="at">sl =</span> roads, <span class="at">attrib =</span> <span class="st">"n"</span>, <span class="at">ncores =</span> <span class="dv">7</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>udunits database from /usr/share/xml/udunits/udunits2.xml</code></pre>
+<pre><code>2022-12-15 15:33:28 constructing segments</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(distance) <span class="ot">&lt;-</span> <span class="st">"m"</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(duree) <span class="ot">&lt;-</span> <span class="st">"min"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>distance <span class="ot">&lt;-</span> <span class="fu">set_units</span>(distance, <span class="st">"km"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>duree <span class="ot">&lt;-</span> <span class="fu">set_units</span>(duree, <span class="st">"h"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>vitesse <span class="ot">&lt;-</span> distance <span class="sc">/</span> duree</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2022-12-15 15:33:46 building geometry</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2022-12-15 15:33:48 simplifying geometry</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2022-12-15 15:33:48 aggregating flows</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2022-12-15 15:33:49 rejoining segments into linestrings</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="index_cache/html/tlse_082dd6ee1b6be345f6841b6b080a6ae0">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>tlse <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(<span class="fu">data.frame</span>(<span class="at">id =</span> <span class="st">"Capitol"</span>, <span class="at">x =</span> <span class="fl">1.44449</span>, <span class="at">y =</span> <span class="fl">43.60445</span>), </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>), <span class="at">crs =</span> <span class="st">"EPSG:4326"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>tlse <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(tlse, <span class="st">"EPSG:3857"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>tlse_buff <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(tlse, <span class="dv">30000</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="index_cache/html/osmT_38c70529216bf5849f8ebfc6afc8b4bd">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maptiles)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>osm <span class="ot">&lt;-</span> <span class="fu">get_tiles</span>(tlse_buff, <span class="at">provider =</span> <span class="st">"Stamen.TerrainBackground"</span>,<span class="at">zoom =</span> <span class="dv">11</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>osm_r <span class="ot">&lt;-</span> <span class="fu">crop</span>(<span class="fu">mask</span>(osm, tlse_buff), tlse_buff)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="index_cache/html/osmap_db2fea906a05cf723cd4a1b1a195621a">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>roads_n_in <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(roads_n, <span class="fu">st_geometry</span>(tlse_buff))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: attribute variables are assumed to be spatially constant throughout all
+geometries</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_theme</span>(<span class="st">"green"</span>, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>), <span class="at">line =</span> <span class="dv">2</span>, <span class="at">cex =</span> <span class="fl">1.8</span>, <span class="at">inner =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_init</span>(osm_r,  <span class="at">expandBB =</span> <span class="fu">c</span>(.<span class="dv">05</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_raster</span>(osm_r, <span class="at">add =</span> T)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(roads_n_in, <span class="st">'n'</span>, <span class="st">'prop'</span>, <span class="at">leg_pos =</span> <span class="st">"topright"</span>, <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Nombre de</span><span class="sc">\n</span><span class="st">covoiturages</span><span class="sc">\n</span><span class="st">par tronçon"</span>, <span class="at">val_max =</span> <span class="dv">1000</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> tlse_buff, <span class="at">col  =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">15</span>, <span class="at">add =</span> T)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(<span class="st">"Covoit à Toulouse"</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(<span class="fu">get_credit</span>(<span class="st">"Stamen.TerrainBackground"</span>), <span class="at">bg =</span><span class="fu">mf_theme</span>()<span class="sc">$</span>bg)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/osmap-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+
+</div>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-1_e75db41bbacb42219f2fefba006f58d8">
+
+</div>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-2_651c540349e0ce2cb1ccec6efba83390">
+
+</div>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-3_abef5c74766f5a03d60b9dd7b2a9fcd9">
+
+</div>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-4_9b7b0e9d91bc8d01eddab1897bb78074">
+
+</div>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-5_c7ce6b3ebf241cab841466b610662ddb">
+
+</div>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-6_24f88c0e75410b7a104886771875f762">
+
 </div>
 </section>
-<section id="représentations" class="level3">
-<h3 class="anchored" data-anchor-id="représentations">Représentations</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(duree)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(distance)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(vitesse)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> distance, <span class="at">y =</span> duree,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre durée et distance des trajets"</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkred"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> distance, <span class="at">y =</span> vitesse,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre vitesse et distance des trajets"</span>,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkred"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="analyse-des-points-de-départ-et-darrivée" class="level3">
-<h3 class="anchored" data-anchor-id="analyse-des-points-de-départ-et-darrivée">Analyse des points de départ et d’arrivée</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Linking to GEOS 3.9.0, GDAL 3.2.2, PROJ 7.2.1; sf_use_s2() is TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapsf)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">scale =</span> <span class="dv">10</span>,<span class="at">type =</span> <span class="st">"countries"</span>, <span class="at">country =</span> <span class="st">"France"</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span> )</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ww <span class="ot">&lt;-</span> <span class="fu">st_cast</span>(<span class="at">x =</span> w, <span class="st">"POLYGON"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in st_cast.sf(x = w, "POLYGON"): repeating attributes for all
-sub-geometries for which they may not be constant</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ww<span class="sc">$</span>areas <span class="ot">&lt;-</span><span class="fu">st_area</span>(ww)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fra <span class="ot">&lt;-</span> ww[<span class="fu">order</span>(ww<span class="sc">$</span>areas, <span class="at">decreasing =</span> T), ][<span class="dv">1</span>,]</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(fra)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fra <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(fra, <span class="st">'EPSG:2154'</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>fra <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(fra, <span class="dv">10000</span>) </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(fra)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(cov, </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"journey_start_lon"</span>, <span class="st">"journey_start_lat"</span>),</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">crs =</span> <span class="st">"EPSG:4326"</span>)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>end <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(cov, </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"journey_end_lon"</span>, <span class="st">"journey_end_lat"</span>),</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">crs =</span> <span class="st">"EPSG:4326"</span>)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(start, <span class="st">"EPSG:2154"</span>)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>end <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(end, <span class="st">"EPSG:2154"</span>)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> start[<span class="fu">st_intersects</span>(start, fra, <span class="at">sparse =</span> <span class="cn">FALSE</span>),]</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>end <span class="ot">&lt;-</span> end[<span class="fu">st_intersects</span>(end, fra, <span class="at">sparse =</span> <span class="cn">FALSE</span>),]</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(fra)</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(start, <span class="at">add =</span> T, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkred"</span>)</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(<span class="st">"départs"</span>)</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(fra)</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(end, <span class="at">add =</span> T, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkblue"</span>)</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(<span class="st">"arrivées"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">st_make_grid</span>(<span class="at">x =</span> fra, <span class="at">cellsize =</span> <span class="dv">20000</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(g)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(fra)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(g, <span class="at">add =</span> T, <span class="at">col =</span> <span class="cn">NA</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g[fra, ]</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>inter <span class="ot">&lt;-</span> <span class="fu">st_intersects</span>(g, start, <span class="at">sparse =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>g<span class="sc">$</span>n_start <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="at">X =</span> inter, <span class="at">FUN =</span> length)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>g<span class="sc">$</span>n_end <span class="ot">&lt;-</span> <span class="fu">st_intersects</span>(g, end, <span class="at">sparse =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sapply</span>(length)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(fra)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(g, <span class="at">var =</span> <span class="st">"n_start"</span>, <span class="st">"prop"</span>, <span class="at">add =</span> T, </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">val_max =</span> <span class="dv">50000</span>, <span class="at">border =</span> <span class="st">"grey90"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>647 '0' values are not plotted on the map.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(<span class="st">"départs"</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(fra)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(g, <span class="at">var =</span> <span class="st">"n_end"</span>, <span class="st">"prop"</span>, <span class="at">add =</span> T, </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">val_max =</span> <span class="dv">50000</span>, <span class="at">col =</span> <span class="st">"darkblue"</span>, <span class="at">border =</span> <span class="st">"grey90"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>664 '0' values are not plotted on the map.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(<span class="st">"arrivées"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(g, <span class="at">var =</span> <span class="st">"n_start"</span>, <span class="st">"choro"</span>, <span class="at">border =</span> <span class="cn">NA</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(<span class="st">"départs"</span>)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(g, <span class="at">var =</span> <span class="st">"n_end"</span>, <span class="st">"choro"</span>, <span class="at">border =</span> <span class="cn">NA</span>)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(<span class="st">"arrivées"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
 </section>
 </section>
 
