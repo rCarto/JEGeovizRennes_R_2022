@@ -16,7 +16,7 @@ toc: true
 number-sections: true
 
 execute: 
-  cache: true
+  cache: false
 ---
 
 ## Introduction
@@ -47,30 +47,42 @@ Bilan personnel de l'outil (forces et limites) dans l'offre actuelle
 ```{r download}
 #| eval: false
 dir.create("data-raw")
+cov_2022_11 <- "https://www.data.gouv.fr/fr/datasets/r/5d469743-9636-4e84-841c-2ae1111b4009"
+cov_2022_10 <- "https://www.data.gouv.fr/fr/datasets/r/80b38046-8166-49fd-bbee-fc0ba9612a88"
 cov_2022_09 <- "https://www.data.gouv.fr/fr/datasets/r/513862ee-8e8e-426b-9b67-7a4e39ab253a"
+download.file(cov_2022_11, destfile = "data-raw/cov_2022_11.csv")
+download.file(cov_2022_10, destfile = "data-raw/cov_2022_10.csv")
 download.file(cov_2022_09, destfile = "data-raw/cov_2022_09.csv")
 ```
 
 ### Import des données
 
 ```{r import}
-cov_raw <- read.csv(file = "data-raw/cov_2022_10.csv", sep = ";")
-cov <- cov_raw
+#| eval: false
+cov_raw_1 <- read.csv(file = "data-raw/cov_2022_09.csv", sep = ";")
+cov_raw_2 <- read.csv(file = "data-raw/cov_2022_10.csv", sep = ";")
+cov_raw_3 <- read.csv(file = "data-raw/cov_2022_11.csv", sep = ";")
+
+cov_raw <- rbind(cov_raw_1, cov_raw_2, cov_raw_3)
 ```
 
-```{r nada}
-#| echo: false
-#| eval: false
-# occitanie <- c("46", "12", "48", "30", 
-#                "34", "81", "82", "32", 
-#                "31", "65", "09", "66", "11")
-# length(occitanie)
-# cov <- cov_raw[
-#   cov_raw$journey_start_department %in% occitanie & 
-#     cov_raw$journey_end_department %in% occitanie, 
-# ]
-# nrow(cov)
+```{r realimport}
+#| include: false
+cov_raw <- readRDS("data/cov.rds")
 ```
+
+
+
+### Découverte du jeu de données
+
+```{r decouverte}
+nrow(cov_raw)
+ncol(cov_raw)
+names(cov_raw)
+head(cov_raw, 1)
+```
+
+
 
 
 ### Nettoyage
@@ -152,21 +164,21 @@ abline(h = 110, lty = 2, lwd = .5)
 Nous sélectionnons les trajets depuis ou vers la Haute-Garonne (31) de moins de 100 km.
 
 ```{r selecta31}
-cov31 <- cov[(cov$journey_start_department %in% 31 | 
-               cov$journey_end_department %in% 31) & 
-               cov$journey_distance <= 100000 , ]
+dep <- 31
+covdep <- cov[cov$journey_start_department %in% dep & 
+                cov$journey_distance <= 100000 &
+                cov$journey_duration <= 150, ]
 ```
 
 #### Calcul des indicateurs, gestion des unités de mesure
 
 ```{r indicators31}
-duree <- cov31$journey_duration
-distance <- cov31$journey_distance
+duree <- covdep$journey_duration
+distance <- covdep$journey_distance
 library(units)
 units(distance) <- "m"
 units(duree) <- "min"
 distance <- set_units(distance, "km")
-
 vitesse <- distance / duree
 vitesse <- set_units(vitesse, "km/h")
 ```
@@ -189,9 +201,9 @@ knitr::kable(summary_table, digits = 1)
 
 ```{r histograms31}
 #| fig-show: hold
-hist(duree, breaks = seq(0,100,1))
+hist(duree, breaks = seq(0,max(as.numeric(duree))+1,1))
 hist(distance, breaks = seq(0,100,1))
-hist(vitesse, breaks = seq(0,100,1))
+hist(vitesse, breaks = seq(0,max(as.numeric(vitesse)+1),1))
 ```
 
 ```{r plot_dd31}
@@ -217,6 +229,8 @@ Elle nécessite d'avoir accès à un serveur OSRM.
 
 ```{r nadapar}
 #| eval: false
+#| code-fold: true
+#| code-summary: "Show the code"
 get_routes <- function(x, 
                        srcX = "srcx", srcY = "srcy",
                        dstX = "dstx", dstY = "dsty", 
@@ -260,17 +274,28 @@ Pour la réutilisation nous enregistrons les routes
 
 ```{r nadagetroads}
 #| eval: false
-roads <- get_routes(x = cov31, 
+roads <- get_routes(x = covdep, 
                     srcX = "journey_start_lon", 
                     srcY = "journey_start_lat",
                     dstX = "journey_end_lon", 
                     dstY = "journey_end_lat", 
                     ncl = 7)
 library(sf)
-st_write(obj = roads, dsn = "data/road.gpkg", layer = "road")
+st_write(obj = roads, 
+         dsn = "data/road.gpkg", 
+         layer = paste0("road_",dep), 
+         append = FALSE)
+
+roads <- st_transform(roads, "EPSG:3857")
+library(stplanr)
+roads$n <- 1
+roads_n <- overline(sl = roads, attrib = "n", ncores = 8)
+st_write(obj = roads_n, 
+         dsn = "data/road.gpkg", 
+         layer = paste0("road_",dep,"_ag"), 
+         append = FALSE)
+
 ```
-
-
 
 
 
@@ -278,20 +303,19 @@ st_write(obj = roads, dsn = "data/road.gpkg", layer = "road")
 
 ```{r importroads}
 library(sf)
-road_raw <- st_read(dsn = "data/road.gpkg", layer = "road")
+roads <- st_read(dsn = "data/road.gpkg", layer = paste0("road_",dep))
+roads_n <- st_read(dsn = "data/road.gpkg", layer = paste0("road_",dep, "_ag"))
 ```
 
 #### Comparaison 
 ```{r graphroadsosrm}
 #| fig-width: 5
 #| fig-height: 5
-roads <- road_raw
 units(roads$duration) <- "min" 
 units(roads$distance) <- "km" 
-
 plot(duree, round(roads$duration,2), asp = 1, 
      pch = 21, cex = .5, col = "white",
-     bg = "darkred", xlim = c(0,90), ylim = c(0,90))
+     bg = "darkred", xlim = c(0,100), ylim = c(0,100))
 abline(a = 0, b = 1)
 
 plot(distance, roads$distance, asp = 1, 
@@ -306,49 +330,120 @@ abline(a = 0, b = 1)
 
 
 #### Carto
-
-Agrégation des tronçons de route
-```{r aggrega}
-roads <- st_transform(roads, "EPSG:3857")
-library(stplanr)
-roads$n <- 1
-roads_n <- overline(sl = roads, attrib = "n", ncores = 7)
-```
-
-
 ```{r tlse}
-tlse <- st_as_sf(data.frame(id = "Capitol", x = 1.44449, y = 43.60445), 
-                 coords = c("x", "y"), crs = "EPSG:4326")
-tlse <- st_transform(tlse, "EPSG:3857")
-tlse_buff <- st_buffer(tlse, 30000)
+covdep_start <- st_as_sf(covdep, 
+                         coords  = c('journey_start_lon', 'journey_start_lat'), 
+                         crs = "EPSG:4326", remove = F)
+covdep_end <- st_as_sf(covdep, 
+                       coords  = c('journey_end_lon', 'journey_end_lat'), 
+                       crs = "EPSG:4326", remove = F)
+
+covdep_start <- st_transform(covdep_start, "EPSG:3857")
+covdep_end <- st_transform(covdep_end, "EPSG:3857")
+
+# centroids des départs 
+city <- tapply(X = covdep$trip_id, 
+               INDEX = covdep$journey_start_towngroup, 
+               FUN = length) |>
+  sort(decreasing = TRUE)|>
+  names()|>
+  head(1)
+
+zone <- covdep_start |>
+  subset(journey_start_towngroup %in% city) |>
+  st_geometry() |>
+  st_union() |>
+  st_centroid() |>
+  st_buffer(30000) |>
+  st_sf()
+
 ```
 
 
 ```{r osmT}
 library(maptiles)
-osm <- get_tiles(tlse_buff, provider = "Stamen.TerrainBackground",zoom = 11)
+osm <- get_tiles(zone, 
+                 provider = "Stamen.TerrainBackground", 
+                 zoom = 10)
 library(terra)
-osm_r <- crop(mask(osm, tlse_buff), tlse_buff)
+osm_r <- osm |>
+  mask(zone) |>
+  crop(zone)
 ```
 
 
 ```{r osmap}
 #| fig-width: 7
 #| fig-height: 7
-roads_n_in <- st_intersection(roads_n, st_geometry(tlse_buff))
-mf_theme("green", mar = c(0,0,2,0), line = 2, cex = 1.8, inner = FALSE)
-mf_init(osm_r,  expandBB = c(.05,0,0,0.2))
+library(mapsf)
+roads_n_in <- st_intersection(roads_n, st_geometry(zone))
+maxv <- max(roads_n_in$n)
+credits <- paste0("T. Giraud, 2023\n", 
+                  get_credit("Stamen.TerrainBackground"), '\n',
+                  "Registre de Preuve de Covoiturage (DGITM) - ", 
+                  "Au départ du département, pour moins de 100 km et ",
+                  "moins d'1H30, ",
+                  "de septembre à novembre 2022")
+theme <- mf_theme("green", mar = c(0,0,2,0), 
+                  line = 2, cex = 1.8, inner = FALSE, pos = "left")
+mf_export(zone, filename = paste0("map", dep, ".png"), 
+          width = 700, height = 658, 
+          expandBB = c(.05,0,0,0.2), theme = theme)
 mf_raster(osm_r, add = T)
 mf_map(roads_n_in, 'n', 'prop', leg_pos = "topright", col = "darkgreen",
-       leg_title = "Nombre de\ncovoiturages\npar tronçon", val_max = 1000)
-mf_map(x = tlse_buff, col  = NA, lwd = 15, add = T)
-mf_title("Covoit à Toulouse")
-mf_credits(get_credit("Stamen.TerrainBackground"), bg =mf_theme()$bg)
+       leg_title = "Nombre de\ncovoiturages\npar tronçon", leg_frame = T, 
+       val_max = maxv)
+mf_title(city)
+mf_credits(credits, bg = mf_theme()$bg)
+mf_map(x = zone, col  = NA, lwd = 15, add = T)
+mf_scale(5)
+dev.off()
 
 ```
 
+![](map31.png){width="700px"}
 
 
+```{r liss}
+library(spatstat)
+p <- as.ppp(st_coordinates(covdep_start), 
+            W = as.owin(zone))
+ds <- density.ppp(p, sigma = 1000, eps = c(100, 100), positive = TRUE)
+rasdens <- rast(ds) * 1000 * 1000
+crs(rasdens) <- 'EPSG:3857'
+v <- values(rasdens)
+bks <- mf_get_breaks(v[v>5], nbreaks = 8, breaks = "geom")
+bks <- unique(c(0,bks))
+cols <- hcl.colors(n = length(bks)-1, "Inferno", rev=F)
+library(tanaka)
+credits <- paste0("T. Giraud, 2023\n", 
+                  "Registre de Preuve de Covoiturage (DGITM)\n", 
+                  "Au départ du département, pour moins de 100 km et ",
+                  "moins d'1H30, ",
+                  "de septembre à novembre 2022")
+mf_export(zone, filename = paste0("map", dep, "dens.png"), 
+          width = 700, height = 658, 
+          expandBB = c(.05,0,0,0.2), theme = theme)
+tanaka(rasdens, breaks = bks, col = cols, 
+       legend.pos = "n", mask = zone, 
+       add = TRUE)
+mf_legend(type = "choro", pos = "topright",
+          val = bks,pal = cols, 
+          title = paste0("Densité de départs\n", 
+                         "KDE, sigma=1km\n",
+                         "(départs par km2)"),
+          val_rnd = 0)
+mf_map(roads_n_in, 'n', 'prop', col = "#ffffff50",
+       leg_title = "Nombre de\ncovoiturages\npar tronçon", 
+       val_max = maxv, leg_pos = "right")
+mf_title(city)
+mf_credits(credits, bg = mf_theme()$bg)
+mf_map(x = zone, col  = NA, lwd = 15, add = T)
+mf_scale(5)
+dev.off()
+```
+
+![](map31dens.png)
 
 
 
@@ -362,199 +457,6 @@ mf_credits(get_credit("Stamen.TerrainBackground"), bg =mf_theme()$bg)
 knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
 ```
 
-
-
-```{r}
-#| echo: false
-library(sf)
-library(mapsf)
-library(rnaturalearth)
-w <- ne_countries(scale = 10,type = "countries", country = "France", returnclass = "sf" )
-ww <- st_cast(x = w, "POLYGON")
-ww$areas <-st_area(ww)
-fra <- ww[order(ww$areas, decreasing = T), ][1,]
-mf_map(fra)
-fra <- st_transform(fra, 'EPSG:2154')
-fra <- st_buffer(fra, 10000) 
-mf_map(fra)
-```
-
-
-```{r}
-#| fig-width: 7
-#| fig-height: 3.8
-start <- st_as_sf(cov, 
-                  coords = c("journey_start_lon", "journey_start_lat"),
-                  crs = "EPSG:4326")
-end <- st_as_sf(cov, 
-                coords = c("journey_end_lon", "journey_end_lat"),
-                crs = "EPSG:4326")
-start <- st_transform(start, "EPSG:2154")
-end <- st_transform(end, "EPSG:2154")
-
-start <- start[st_intersects(start, fra, sparse = FALSE),]
-end <- end[st_intersects(end, fra, sparse = FALSE),]
-par(mfrow = c(1,2))
-mf_map(fra)
-mf_map(start, add = T, pch = 21, cex = .4, col = "white", bg = "darkred")
-mf_title("départs")
-mf_map(fra)
-mf_map(end, add = T, pch = 21, cex = .4, col = "white", bg = "darkblue")
-mf_title("arrivées")
-
-```
-
-```{r}
-g <- st_make_grid(x = fra, cellsize = 20000)
-g <- st_as_sf(g)
-mf_map(fra)
-mf_map(g, add = T, col = NA)
-g <- g[fra, ]
-
-inter <- st_intersects(g, start, sparse = TRUE)
-g$n_start <- sapply(X = inter, FUN = length)
-
-g$n_end <- st_intersects(g, end, sparse = TRUE) |>
-  sapply(length)
-```
-
-
-```{r}
-#| fig-width: 7
-#| fig-height: 3.8
-par(mfrow = c(1,2))
-mf_map(fra)
-mf_map(g, var = "n_start", "prop", add = T, 
-       val_max = 50000, border = "grey90")
-mf_title("départs")
-mf_map(fra)
-mf_map(g, var = "n_end", "prop", add = T, 
-       val_max = 50000, col = "darkblue", border = "grey90")
-mf_title("arrivées")
-```
-
-
-```{r}
-#| fig-width: 7
-#| fig-height: 3.8
-par(mfrow = c(1,2))
-mf_map(g[g$n_start > 0,], var = "n_start", "choro", border = NA)
-mf_title("départs")
-mf_map(g[g$n_end > 0,], var = "n_end", "choro", border = NA)
-mf_title("arrivées")
-```
-
-
-
-```{r}
-#| eval: false
-
-x <- cov[cov$journey_start_department %in% 31 | cov$journey_end_department %in% 31,]
-library(osrm)
-
-get_routes <- function(x, 
-                       srcX = "srcx", srcY = "srcy",
-                       dstX = "dstx", dstY = "dsty", 
-                       ncl = 5){
-  ny <- nrow(x)
-  sequence <- unique(c(seq(1, ny, 500), ny + 1))
-  lseq <- length(sequence) - 1
-  ml <- list()
-  for  (i in 1:lseq) {
-    ml[[i]] <- x[(sequence[i]):(sequence[i + 1] - 1),
-                 c(srcX, srcY, dstX, dstY)]
-  }
-  cl <- parallel::makeCluster(ncl)
-  doParallel::registerDoParallel(cl,)
-  roads <- foreach::`%dopar%`(
-    foreach::foreach(
-      ml = ml,
-      .packages = c("osrm", "sf"),
-      .combine = rbind,
-      .inorder = FALSE
-    ),
-    {
-      l <- vector("list", nrow(ml))
-      for( i in seq_along(l)){
-        l[[i]] <- osrmRoute(src = ml[i, c(srcX, srcY)], 
-                            dst = ml[i, c(dstX, dstY)], 
-                            osrm.server = "http://0.0.0.0:5000/",
-                            osrm.profile = "car",
-                            overview = "full")
-      }
-      l <- do.call(rbind, l)
-      l
-    }
-  )
-  parallel::stopCluster(cl)
-  roads
-}
-
-library(tictoc)
-tic()
-roads <- get_routes(x = x, "journey_start_lon", "journey_start_lat","journey_end_lon", "journey_end_lat", ncl = 7)
-toc()
-roads <- st_transform(roads, "EPSG:2154")
-
-library(stplanr)
-roads$n <- 1
-tic()
-roads_n <- overline(sl = roads, attrib = "n", ncores = 7)
-toc()
-
-roads_n <- st_transform(roads_n, 3857)
-tlse <- st_as_sf(data.frame(id = "Capitol", x = 1.44449, y = 43.60445), 
-                 coords = c("x", "y"), crs = "EPSG:4326")
-tlse <- st_transform(tlse, "EPSG:3857")
-
-tlse_buff <- st_buffer(tlse, 75000)
-
-library(maptiles)
-osm <- get_tiles(tlse_buff, provider = "Stamen.TerrainBackground",zoom = 11)
-# osm2 <- get_tiles(tlse_buff,provider = "Stamen.TerrainLabels", zoom = 9)
-
-
-library(terra)
-osm_r <- crop(mask(osm, tlse_buff), tlse_buff)
-roads_n_in <- st_intersection(roads_n, st_geometry(tlse_buff))
-
-# dim(osm_r)
-# mf_theme()$fg
-mf_theme("green", mar = c(0,0,2,0), line = 2, cex = 1.8, inner = FALSE)
-mf_export(osm_r,width = 1963,  expandBB = c(.05,0,0,0))
-mf_raster(osm_r, add = F)
-mf_map(roads_n_in, 'n', 'prop', leg_pos = "topright", col = "darkgreen",
-       leg_title = "Nombre de\ncovoiturages\npar tronçon", val_max = 500)
-mf_map(x = tlse_buff, col  = NA, lwd = 3, add = T)
-mf_title("Covoit à Toulouse")
-mf_credits(get_credit("Stamen.TerrainBackground"), bg =mf_theme()$bg)
-dev.off()
-
-
-
-units(roads$duration) <- "min" 
-units(roads$distance) <- "km" 
-units(x$journey_duration) <- "min"
-units(x$journey_distance) <- "m"
-
-roads$duration <- set_units(roads$duration, "h")
-x$journey_duration<- set_units(x$journey_duration, "h")
-x$journey_distance<- set_units(x$journey_distance, "km")
-
-
-
-
-plot(x$journey_duration, round(roads$duration,2), asp = 1, 
-     pch = 21, cex = .5, col = "white", bg = "darkred", xlim = c(0,3), ylim = c(0,3))
-abline(a = 0, b = 1)
-
-
-plot(x$journey_distance, roads$distance, asp = 1, 
-     pch = 21, cex = 1, col = "white", bg = "darkred", xlim = c(0,150), ylim = c(0,150))
-abline(a = 0, b = 1)
-
-
-```
 
 
 
