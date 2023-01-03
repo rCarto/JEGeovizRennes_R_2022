@@ -1,8 +1,9 @@
 ---
 format: html 
 title: "Faire des cartes avec le logiciel libre R"
-subtitle: "Journée d'étude 'La boîte à outils de cartographie et de géovisualisation de données : regards croisés de chercheurs'"
+subtitle: "Journée d'étude - La boîte à outils de cartographie et de géovisualisation de données : regards croisés de chercheurs"
 date: 2022-01-06
+
 author:
     - name: Timothée Giraud
       orcid: 0000-0002-1932-3323
@@ -14,36 +15,44 @@ author:
 lang: fr
 toc: true
 number-sections: true
-
+bibliography: references.bib
+csl: "universite-de-montreal-apa.csl"
 execute: 
-  cache: false
+  cache: true
 ---
 
-## Introduction
+# Présentation de l'outil et de son environnement
 
-Historique et principes de l'outil utilisé
 
-Fonctionnalités principales
+## R et RStudio
 
-Usages actuels (montrer quelques supers exemples)
+[Diaporama](https://rcarto.github.io/R_et_RStudio/index.html)
 
-Vos usages de cet outil (quelques exemples de vos réalisations)
+## L'Écosystème spatial de R
 
-Préparation des données
+[Diaporama](https://elementr.gitpages.huma-num.fr/session_1/rspatial/)
 
-Modes de représentations (cartes et graphiques)
 
-Mode d'interactions avec les données
 
-Usages potentiels qu'on a pas eu le temps d'explorer
 
-Bilan personnel de l'outil (forces et limites) dans l'offre actuelle
+
+
+
+
+# Exemple d'analyse
+
+Nous voulons étudier les déplacements effectué en covoiturage. 
+Nous nous concentrerons sur les durées, distances et vitesses de ces déplacements. 
+
+
 
 
 ## Préparation des données
 
-
 ### Téléchargement des données
+
+Nous téléchargeons les données pour les mois de septembre, octobre et novembre 2022. 
+
 ```{r download}
 #| eval: false
 dir.create("data-raw")
@@ -56,6 +65,8 @@ download.file(cov_2022_09, destfile = "data-raw/cov_2022_09.csv")
 ```
 
 ### Import des données
+
+Une fois les données téléchargées nous pouvons les importer dans R. 
 
 ```{r import}
 #| eval: false
@@ -75,32 +86,51 @@ cov_raw <- readRDS("data/cov.rds")
 
 ### Découverte du jeu de données
 
-```{r decouverte}
-nrow(cov_raw)
-ncol(cov_raw)
-names(cov_raw)
-head(cov_raw, 1)
+Nous pouvons étudier la structure et quelques statistiques très basiques sur le jeu de données.
+
+```{r decouverte1}
+# structure du jeu de données
+str(cov_raw)
 ```
+
+```{r decouverte2}
+# statistiques basiques
+summary(cov_raw)
+```
+
+
+
+
+Intéressons nous plus particulièrement aux distances et durées des trajets.
+```{r decouverte3}
+summary(cov_raw$journey_distance)
+summary(cov_raw$journey_duration)
+```
+
+Les valeurs minimums de ces variables sont à 0, ce n'est pas très réaliste. 
+
+
 
 
 
 
 ### Nettoyage
 
-Suppression des trajets sans durée ni distance renseignées
+Suppression des trajets inférieurs à 2 minutes ou inférieurs à 1 kilomètres.
 
 ```{r clean}
-cov <- cov_raw[cov_raw$journey_distance != 0 & 
-                 cov_raw$journey_duration != 0, ]
+cov <- cov_raw[cov_raw$journey_distance >= 1000 & 
+                 cov_raw$journey_duration >= 2, ]
 ```
 
 
 
-## Analyses
 
-### Analyse des durées, distances et vitesses
+## Analyse globale
 
-#### Calcul des indicateurs, gestion des unités de mesure
+### Calcul des indicateurs, gestion des unités de mesure
+
+Le package `units` [@R-units] permet de convertir facilement les unités de mesure. 
 
 ```{r indicators}
 duree <- cov$journey_duration
@@ -113,7 +143,9 @@ duree <- set_units(duree, "h")
 vitesse <- distance / duree
 ```
 
-#### Représentations
+### Représentations
+
+Nous pouvons calculer quelques statistiques sur nos indicateurs.
 
 ```{r table}
 summary_table <- data.frame(
@@ -127,7 +159,7 @@ knitr::kable(summary_table, digits = 1)
 ```
 
 
-
+Nous pouvons aussi créer rapidement des histogrammes des distributions.  
 
 ```{r histograms}
 #| fig-show: hold
@@ -138,7 +170,7 @@ hist(vitesse)
 
 
 
-
+Et finalement nous pouvons croiser les variables deux à deux avec des nuages de points. 
 
 ```{r plot_dd}
 plot(x = distance, y = duree,
@@ -157,11 +189,13 @@ abline(h = 110, lty = 2, lwd = .5)
 
 
 
-### Zoom sur la Haute-Garonne
 
-#### Sélection des données
 
-Nous sélectionnons les trajets depuis ou vers la Haute-Garonne (31) de moins de 100 km.
+## Zoom sur la Haute-Garonne
+
+### Sélection des données
+
+Nous sélectionnons les trajets depuis la Haute-Garonne (31) de moins de 100 km et de moins d'1h30.
 
 ```{r selecta31}
 dep <- 31
@@ -170,7 +204,10 @@ covdep <- cov[cov$journey_start_department %in% dep &
                 cov$journey_duration <= 150, ]
 ```
 
-#### Calcul des indicateurs, gestion des unités de mesure
+> Notez qu'il suffit de modifier `dep <- 31` pour obtenir l'analyse sur un autre département. 
+
+
+### Calcul des indicateurs, gestion des unités de mesure
 
 ```{r indicators31}
 duree <- covdep$journey_duration
@@ -183,7 +220,7 @@ vitesse <- distance / duree
 vitesse <- set_units(vitesse, "km/h")
 ```
 
-#### Représentations
+### Représentations
 
 ```{r table31}
 summary_table <- data.frame(
@@ -206,6 +243,7 @@ hist(distance, breaks = seq(0,100,1))
 hist(vitesse, breaks = seq(0,max(as.numeric(vitesse)+1),1))
 ```
 
+
 ```{r plot_dd31}
 plot(x = distance, y = duree,
      main = "Rapport entre durée et distance des trajets",
@@ -219,18 +257,18 @@ plot(x = distance, y = vitesse,
 ```
 
 
+### Récupération de trajets théoriques
 
-#### Récupération de trajets théoriques
+Nous utilisons le package `osrm` [@R-osrm] pour récupérer les trajets par le plus court chemin entre les points de départs et d'arrivées. Ces trajets sont calculés par le logiciel OSRM (Open Source Routing Machine) [@luxen-vetter-2011] qui se base sur les données d'OpenStreetMap. Le package `osrm` sert d'interface entre R et OSRM.  
 
-Nous utilisons le package osrm.
 
-Cette fonction est utile pour demander une grande quantité de routes.  
-Elle nécessite d'avoir accès à un serveur OSRM. 
+
+La fonction ci-dessous est utile pour demander une grande quantité de routes en utilisant les fonctionnalités de parallélisation de R. Pour l'utiliser il est nécessaire d'avoir accès à un serveur OSRM. 
 
 ```{r nadapar}
 #| eval: false
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Fonction d'extraction des routes en masse"
 get_routes <- function(x, 
                        srcX = "srcx", srcY = "srcy",
                        dstX = "dstx", dstY = "dsty", 
@@ -270,9 +308,8 @@ get_routes <- function(x,
 }
 ```
 
-Pour la réutilisation nous enregistrons les routes
-
-```{r nadagetroads}
+Nous pouvons maintenant extraire les routes avec la fonction `get_routes()`.
+```{r nadagetroadsnope}
 #| eval: false
 roads <- get_routes(x = covdep, 
                     srcX = "journey_start_lon", 
@@ -280,16 +317,190 @@ roads <- get_routes(x = covdep,
                     dstX = "journey_end_lon", 
                     dstY = "journey_end_lat", 
                     ncl = 7)
+
+```
+
+
+```{r importroadsx}
+#| include: false
+library(sf)
+roads <- st_read(dsn = "data/road.gpkg", layer = paste0("road_",dep), quiet = TRUE)
+```
+
+
+Affichons 3 trajets au hasard. Pour les visualiser nous utilisons le package `sf` [@R-sf].
+```{r trestrajos}
+library(sf)
+plot(st_geometry(roads[5:7,]))
+```
+
+
+Cette opération d'extraction étant assez lourde nous pouvons sauvegarder son résultat pour une utilisation ultérieure. 
+
+```{r nadagetroads}
+#| eval: false
 library(sf)
 st_write(obj = roads, 
          dsn = "data/road.gpkg", 
          layer = paste0("road_",dep), 
          append = FALSE)
+```
 
+
+
+
+
+
+
+
+
+
+
+### (Import des trajets pré-enregistrés)
+
+```{r importroadspourdefaux}
+#| eval: false
+library(sf)
+roads <- st_read(dsn = "data/road.gpkg", layer = paste0("road_",dep))
+```
+
+
+
+### Comparaison des trajets réels et théoriques
+
+
+Nous pouvons maintenant comparer les distances et les durées réeeles et théoriques. 
+
+```{r graphroadsosrm}
+#| fig-width: 5
+#| fig-height: 5
+units(roads$duration) <- "min" 
+units(roads$distance) <- "km" 
+duree_osrm <- round(roads$duration,2)
+distance_osrm <- roads$distance
+plot(duree, duree_osrm, asp = 1, 
+     pch = 21, cex = .5, col = "white",
+     bg = "darkred", 
+     xlim = c(0,100), ylim = c(0,100), 
+     main = "Rapport entre durées réelles et théoriques")
+abline(a = 0, b = 1)
+
+plot(distance, distance_osrm, asp = 1, 
+     pch = 21, cex = .5, col = "white", 
+     bg = "darkblue", xlim = c(0,100),
+     ylim = c(0,100),
+     main = "Rapport entre distances réelles et théoriques")
+abline(a = 0, b = 1)
+
+
+```
+
+
+
+### Cartographie 1
+
+Sur une première carte nous montrerons les tronçons de routes empruntés par les usagers du covoiturage dans la zone où a lieu le plus grand nombre de départs dans le département. 
+
+#### Trouver la zone ou a lieu le plus grand nombre de départs
+
+Création d'une couche de points des lieux de départs : 
+```{r tlse}
+covdep_start <- st_as_sf(covdep, 
+                         coords  = c('journey_start_lon', 'journey_start_lat'), 
+                         crs = "EPSG:4326", remove = FALSE)
+# reprojection en webmercator
+covdep_start <- st_transform(covdep_start, "EPSG:3857")
+```
+
+*Towngroup* où ont lieux le plus de départs : 
+```{r tlse1}
+# Aggrégation des départ par towngroup 
+# et sélection du towngroup ayant le plus de départs
+city <- tapply(X = covdep$trip_id, 
+               INDEX = covdep$journey_start_towngroup, 
+               FUN = length) |>
+  sort(decreasing = TRUE)|>
+  names()|>
+  head(1)
+
+city
+```
+
+Création d'une zone de 30 km autour du centroide des départs de la zone : 
+
+```{r tlse2}
+zone <- covdep_start |>
+  subset(journey_start_towngroup %in% city) |>
+  st_geometry() |>
+  st_union() |>
+  st_centroid() |>
+  st_buffer(30000) |>
+  st_sf()
+```
+
+
+#### Télécharger des tuiles raster pour le fond de carte
+Téléchargement de tuiles raster (Terrain Background de chez Stamen) sur la zone. Nous utilisons le package `maptiles` [@R-maptiles] pour cela :
+
+```{r osmT}
+#| cache: false
+library(maptiles)
+osm <- get_tiles(zone, 
+                 provider = "Stamen.TerrainBackground", 
+                 zoom = 11, 
+                 cachedir = "tiles", verbose = TRUE)
+plot_tiles(osm)
+```
+
+Nous pouvons ensuite découper les tuiles en fonction de la zone définie précédement. Pour cela nous utilisons le package `terra` [@R-terra] :
+
+```{r osmT2}
+#| cache: false
+library(terra)
+osm_r <- osm |>
+  mask(zone) |>
+  crop(zone)
+```
+
+Nous pouvons ensuite visualiser les tuiles et la zone grace au package `mapsf` [@R-mapsf].
+
+```{r osmT3}
+library(mapsf)
+# définition d'un thème
+theme <- mf_theme("green",
+                  mar = c(0,0,2,0), 
+                  line = 2, 
+                  cex = 1.8, 
+                  inner = FALSE, 
+                  pos = "left")
+mf_init(zone)
+mf_raster(osm_r, add = TRUE)
+mf_map(zone, col = NA, lwd = 15, add = TRUE)
+```
+
+
+
+#### Agrégation des tronçons
+
+Nous devons maintenant agréger les tronçons de route se superposant et compter le nombre de superposition par tronçons. Pour cela nous utilisons le package `stplanr` [@R-stplanr]. Cette opéaration est assez lourde, nous enregristrons son résultat pour une utilisation ultérieure : 
+
+
+
+
+
+```{r}
+#| eval: false
+# reprojection en webmercator
 roads <- st_transform(roads, "EPSG:3857")
+# découage des route à la limite de la zone
+roads <- st_intersection(roads, st_geometry(zone))
+# keep only linestrings
+roads <- st_collection_extract(roads, "LINESTRING")
+# Agrégation des tronçons
 library(stplanr)
 roads$n <- 1
 roads_n <- overline(sl = roads, attrib = "n", ncores = 8)
+# Sauvegarder le résultat
 st_write(obj = roads_n, 
          dsn = "data/road.gpkg", 
          layer = paste0("road_",dep,"_ag"), 
@@ -298,132 +509,87 @@ st_write(obj = roads_n,
 ```
 
 
-
-#### Nettoyage
-
+(Import des tronçons agrégés)
 ```{r importroads}
-library(sf)
-roads <- st_read(dsn = "data/road.gpkg", layer = paste0("road_",dep))
-roads_n <- st_read(dsn = "data/road.gpkg", layer = paste0("road_",dep, "_ag"))
-```
-
-#### Comparaison 
-```{r graphroadsosrm}
-#| fig-width: 5
-#| fig-height: 5
-units(roads$duration) <- "min" 
-units(roads$distance) <- "km" 
-plot(duree, round(roads$duration,2), asp = 1, 
-     pch = 21, cex = .5, col = "white",
-     bg = "darkred", xlim = c(0,100), ylim = c(0,100))
-abline(a = 0, b = 1)
-
-plot(distance, roads$distance, asp = 1, 
-     pch = 21, cex = .5, col = "white", 
-     bg = "darkblue", xlim = c(0,100),
-     ylim = c(0,100))
-abline(a = 0, b = 1)
-
-
+#| eval: true
+roads_n <- st_read(dsn = "data/road.gpkg", 
+                   layer = paste0("road_",dep, "_ag"), 
+                   quiet = TRUE)
 ```
 
 
-
-#### Carto
-```{r tlse}
-covdep_start <- st_as_sf(covdep, 
-                         coords  = c('journey_start_lon', 'journey_start_lat'), 
-                         crs = "EPSG:4326", remove = F)
-covdep_end <- st_as_sf(covdep, 
-                       coords  = c('journey_end_lon', 'journey_end_lat'), 
-                       crs = "EPSG:4326", remove = F)
-
-covdep_start <- st_transform(covdep_start, "EPSG:3857")
-covdep_end <- st_transform(covdep_end, "EPSG:3857")
-
-# centroids des départs 
-city <- tapply(X = covdep$trip_id, 
-               INDEX = covdep$journey_start_towngroup, 
-               FUN = length) |>
-  sort(decreasing = TRUE)|>
-  names()|>
-  head(1)
-
-zone <- covdep_start |>
-  subset(journey_start_towngroup %in% city) |>
-  st_geometry() |>
-  st_union() |>
-  st_centroid() |>
-  st_buffer(30000) |>
-  st_sf()
-
-```
-
-
-```{r osmT}
-library(maptiles)
-osm <- get_tiles(zone, 
-                 provider = "Stamen.TerrainBackground", 
-                 zoom = 10)
-library(terra)
-osm_r <- osm |>
-  mask(zone) |>
-  crop(zone)
-```
-
+#### Création de la carte
 
 ```{r osmap}
-#| fig-width: 7
-#| fig-height: 7
-library(mapsf)
-roads_n_in <- st_intersection(roads_n, st_geometry(zone))
-maxv <- max(roads_n_in$n)
+#| results: hide
+# Valeur max
+maxv <- max(roads_n$n)
+# Credits de la carte
 credits <- paste0("T. Giraud, 2023\n", 
                   get_credit("Stamen.TerrainBackground"), '\n',
                   "Registre de Preuve de Covoiturage (DGITM) - ", 
                   "Au départ du département, pour moins de 100 km et ",
                   "moins d'1H30, ",
                   "de septembre à novembre 2022")
-theme <- mf_theme("green", mar = c(0,0,2,0), 
-                  line = 2, cex = 1.8, inner = FALSE, pos = "left")
 mf_export(zone, filename = paste0("map", dep, ".png"), 
-          width = 700, height = 658, 
-          expandBB = c(.05,0,0,0.2), theme = theme)
+          width = 700, expandBB = c(.05,0,0,0.2), 
+          theme = theme)
 mf_raster(osm_r, add = T)
-mf_map(roads_n_in, 'n', 'prop', leg_pos = "topright", col = "darkgreen",
-       leg_title = "Nombre de\ncovoiturages\npar tronçon", leg_frame = T, 
-       val_max = maxv)
+mf_map(x = roads_n, var = 'n', type = 'prop', 
+       val_max = maxv, col = "darkgreen",
+       leg_pos = "topright", 
+       leg_title = "Nombre de\ncovoiturages\npar tronçon", 
+       leg_frame = TRUE, 
+       )
 mf_title(city)
 mf_credits(credits, bg = mf_theme()$bg)
-mf_map(x = zone, col  = NA, lwd = 15, add = T)
+mf_map(x = zone, col  = NA, lwd = 15, add = TRUE)
 mf_scale(5)
 dev.off()
-
 ```
 
 ![](map31.png){width="700px"}
 
+### Cartographie 2
+
+Sur une deuxième carte nous allons représenté la densité des points de départs en utilisant la méthode KDE. 
+
+#### Calcul du KDE
+Pour cela nous utilisons le package `spatstat` [@R-spatstat] :
 
 ```{r liss}
-library(spatstat)
-p <- as.ppp(st_coordinates(covdep_start), 
-            W = as.owin(zone))
+#| results: hide
+library("spatstat", quietly = TRUE)
+# transformation des points sf en points spatstat
+p <- as.ppp(st_coordinates(covdep_start), W = as.owin(zone))
+# calcul du KDE
 ds <- density.ppp(p, sigma = 1000, eps = c(100, 100), positive = TRUE)
 rasdens <- rast(ds) * 1000 * 1000
 crs(rasdens) <- 'EPSG:3857'
+plot(rasdens)
+```
+
+#### Cartographie
+
+Nous utlisons le package `tanaka` [@R-tanaka] pour représenter le KDE avec un effet pseudo 3D : 
+```{r liss2}
+#| results: hide
+# calcul des bornes des classes
 v <- values(rasdens)
 bks <- mf_get_breaks(v[v>5], nbreaks = 8, breaks = "geom")
 bks <- unique(c(0,bks))
+# création d'une palette de couleurs
 cols <- hcl.colors(n = length(bks)-1, "Inferno", rev=F)
-library(tanaka)
+# crédits
 credits <- paste0("T. Giraud, 2023\n", 
                   "Registre de Preuve de Covoiturage (DGITM)\n", 
                   "Au départ du département, pour moins de 100 km et ",
                   "moins d'1H30, ",
                   "de septembre à novembre 2022")
+library(tanaka)
 mf_export(zone, filename = paste0("map", dep, "dens.png"), 
-          width = 700, height = 658, 
-          expandBB = c(.05,0,0,0.2), theme = theme)
+          width = 700, expandBB = c(.05,0,0,0.2), 
+          theme = theme)
 tanaka(rasdens, breaks = bks, col = cols, 
        legend.pos = "n", mask = zone, 
        add = TRUE)
@@ -433,7 +599,7 @@ mf_legend(type = "choro", pos = "topright",
                          "KDE, sigma=1km\n",
                          "(départs par km2)"),
           val_rnd = 0)
-mf_map(roads_n_in, 'n', 'prop', col = "#ffffff50",
+mf_map(roads_n, 'n', 'prop', col = "#ffffff50",
        leg_title = "Nombre de\ncovoiturages\npar tronçon", 
        val_max = maxv, leg_pos = "right")
 mf_title(city)
@@ -443,19 +609,36 @@ mf_scale(5)
 dev.off()
 ```
 
-![](map31dens.png)
+![](map31dens.png){width="700px"}
+
+## Autres villes 
+::: {.panel-tabset}
+
+
+### Nantes 
+![](map44.png){width="700px"}
+![](map44dens.png){width="700px"}
+
+### Montellier
+![](map34.png){width="700px"}
+![](map34dens.png){width="700px"}
+:::
+
+
+## Pour la reproductibilité
+
+```{r}
+sessionInfo()
+```
 
 
 
-
-
-
-
-```{r utils}
+```{r utils2}
 #| cache: false
 #| echo: false
 knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
 ```
+
 
 
 

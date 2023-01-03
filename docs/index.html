@@ -84,6 +84,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -109,18 +128,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table des matières</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">1</span>  Introduction</a></li>
-  <li><a href="#préparation-des-données" id="toc-préparation-des-données" class="nav-link" data-scroll-target="#préparation-des-données"><span class="toc-section-number">2</span>  Préparation des données</a>
+  <li><a href="#présentation-de-loutil-et-de-son-environnement" id="toc-présentation-de-loutil-et-de-son-environnement" class="nav-link active" data-scroll-target="#présentation-de-loutil-et-de-son-environnement"><span class="toc-section-number">1</span>  Présentation de l’outil et de son environnement</a>
   <ul class="collapse">
-  <li><a href="#téléchargement-des-données" id="toc-téléchargement-des-données" class="nav-link" data-scroll-target="#téléchargement-des-données"><span class="toc-section-number">2.1</span>  Téléchargement des données</a></li>
-  <li><a href="#import-des-données" id="toc-import-des-données" class="nav-link" data-scroll-target="#import-des-données"><span class="toc-section-number">2.2</span>  Import des données</a></li>
-  <li><a href="#découverte-du-jeu-de-données" id="toc-découverte-du-jeu-de-données" class="nav-link" data-scroll-target="#découverte-du-jeu-de-données"><span class="toc-section-number">2.3</span>  Découverte du jeu de données</a></li>
-  <li><a href="#nettoyage" id="toc-nettoyage" class="nav-link" data-scroll-target="#nettoyage"><span class="toc-section-number">2.4</span>  Nettoyage</a></li>
+  <li><a href="#r-et-rstudio" id="toc-r-et-rstudio" class="nav-link" data-scroll-target="#r-et-rstudio"><span class="toc-section-number">1.1</span>  R et RStudio</a></li>
+  <li><a href="#lécosystème-spatial-de-r" id="toc-lécosystème-spatial-de-r" class="nav-link" data-scroll-target="#lécosystème-spatial-de-r"><span class="toc-section-number">1.2</span>  L’Écosystème spatial de R</a></li>
   </ul></li>
-  <li><a href="#analyses" id="toc-analyses" class="nav-link" data-scroll-target="#analyses"><span class="toc-section-number">3</span>  Analyses</a>
+  <li><a href="#exemple-danalyse" id="toc-exemple-danalyse" class="nav-link" data-scroll-target="#exemple-danalyse"><span class="toc-section-number">2</span>  Exemple d’analyse</a>
   <ul class="collapse">
-  <li><a href="#analyse-des-durées-distances-et-vitesses" id="toc-analyse-des-durées-distances-et-vitesses" class="nav-link" data-scroll-target="#analyse-des-durées-distances-et-vitesses"><span class="toc-section-number">3.1</span>  Analyse des durées, distances et vitesses</a></li>
-  <li><a href="#zoom-sur-la-haute-garonne" id="toc-zoom-sur-la-haute-garonne" class="nav-link" data-scroll-target="#zoom-sur-la-haute-garonne"><span class="toc-section-number">3.2</span>  Zoom sur la Haute-Garonne</a></li>
+  <li><a href="#préparation-des-données" id="toc-préparation-des-données" class="nav-link" data-scroll-target="#préparation-des-données"><span class="toc-section-number">2.1</span>  Préparation des données</a>
+  <ul class="collapse">
+  <li><a href="#téléchargement-des-données" id="toc-téléchargement-des-données" class="nav-link" data-scroll-target="#téléchargement-des-données"><span class="toc-section-number">2.1.1</span>  Téléchargement des données</a></li>
+  <li><a href="#import-des-données" id="toc-import-des-données" class="nav-link" data-scroll-target="#import-des-données"><span class="toc-section-number">2.1.2</span>  Import des données</a></li>
+  <li><a href="#découverte-du-jeu-de-données" id="toc-découverte-du-jeu-de-données" class="nav-link" data-scroll-target="#découverte-du-jeu-de-données"><span class="toc-section-number">2.1.3</span>  Découverte du jeu de données</a></li>
+  <li><a href="#nettoyage" id="toc-nettoyage" class="nav-link" data-scroll-target="#nettoyage"><span class="toc-section-number">2.1.4</span>  Nettoyage</a></li>
+  </ul></li>
+  <li><a href="#analyse-globale" id="toc-analyse-globale" class="nav-link" data-scroll-target="#analyse-globale"><span class="toc-section-number">2.2</span>  Analyse globale</a>
+  <ul class="collapse">
+  <li><a href="#calcul-des-indicateurs-gestion-des-unités-de-mesure" id="toc-calcul-des-indicateurs-gestion-des-unités-de-mesure" class="nav-link" data-scroll-target="#calcul-des-indicateurs-gestion-des-unités-de-mesure"><span class="toc-section-number">2.2.1</span>  Calcul des indicateurs, gestion des unités de mesure</a></li>
+  <li><a href="#représentations" id="toc-représentations" class="nav-link" data-scroll-target="#représentations"><span class="toc-section-number">2.2.2</span>  Représentations</a></li>
+  </ul></li>
+  <li><a href="#zoom-sur-la-haute-garonne" id="toc-zoom-sur-la-haute-garonne" class="nav-link" data-scroll-target="#zoom-sur-la-haute-garonne"><span class="toc-section-number">2.3</span>  Zoom sur la Haute-Garonne</a>
+  <ul class="collapse">
+  <li><a href="#sélection-des-données" id="toc-sélection-des-données" class="nav-link" data-scroll-target="#sélection-des-données"><span class="toc-section-number">2.3.1</span>  Sélection des données</a></li>
+  <li><a href="#calcul-des-indicateurs-gestion-des-unités-de-mesure-1" id="toc-calcul-des-indicateurs-gestion-des-unités-de-mesure-1" class="nav-link" data-scroll-target="#calcul-des-indicateurs-gestion-des-unités-de-mesure-1"><span class="toc-section-number">2.3.2</span>  Calcul des indicateurs, gestion des unités de mesure</a></li>
+  <li><a href="#représentations-1" id="toc-représentations-1" class="nav-link" data-scroll-target="#représentations-1"><span class="toc-section-number">2.3.3</span>  Représentations</a></li>
+  <li><a href="#récupération-de-trajets-théoriques" id="toc-récupération-de-trajets-théoriques" class="nav-link" data-scroll-target="#récupération-de-trajets-théoriques"><span class="toc-section-number">2.3.4</span>  Récupération de trajets théoriques</a></li>
+  <li><a href="#import-des-trajets-pré-enregistrés" id="toc-import-des-trajets-pré-enregistrés" class="nav-link" data-scroll-target="#import-des-trajets-pré-enregistrés"><span class="toc-section-number">2.3.5</span>  (Import des trajets pré-enregistrés)</a></li>
+  <li><a href="#comparaison-des-trajets-réels-et-théoriques" id="toc-comparaison-des-trajets-réels-et-théoriques" class="nav-link" data-scroll-target="#comparaison-des-trajets-réels-et-théoriques"><span class="toc-section-number">2.3.6</span>  Comparaison des trajets réels et théoriques</a></li>
+  <li><a href="#cartographie-1" id="toc-cartographie-1" class="nav-link" data-scroll-target="#cartographie-1"><span class="toc-section-number">2.3.7</span>  Cartographie 1</a></li>
+  <li><a href="#cartographie-2" id="toc-cartographie-2" class="nav-link" data-scroll-target="#cartographie-2"><span class="toc-section-number">2.3.8</span>  Cartographie 2</a></li>
+  </ul></li>
+  <li><a href="#autres-villes" id="toc-autres-villes" class="nav-link" data-scroll-target="#autres-villes"><span class="toc-section-number">2.4</span>  Autres villes</a></li>
+  <li><a href="#pour-la-reproductibilité" id="toc-pour-la-reproductibilité" class="nav-link" data-scroll-target="#pour-la-reproductibilité"><span class="toc-section-number">2.5</span>  Pour la reproductibilité</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -130,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Faire des cartes avec le logiciel libre R</h1>
-<p class="subtitle lead">Journée d’étude ‘La boîte à outils de cartographie et de géovisualisation de données : regards croisés de chercheurs’</p>
+<p class="subtitle lead">Journée d’étude - La boîte à outils de cartographie et de géovisualisation de données : regards croisés de chercheurs</p>
 </div>
 
 
@@ -166,23 +205,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="introduction" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
-<p>Historique et principes de l’outil utilisé</p>
-<p>Fonctionnalités principales</p>
-<p>Usages actuels (montrer quelques supers exemples)</p>
-<p>Vos usages de cet outil (quelques exemples de vos réalisations)</p>
-<p>Préparation des données</p>
-<p>Modes de représentations (cartes et graphiques)</p>
-<p>Mode d’interactions avec les données</p>
-<p>Usages potentiels qu’on a pas eu le temps d’explorer</p>
-<p>Bilan personnel de l’outil (forces et limites) dans l’offre actuelle</p>
+<section id="présentation-de-loutil-et-de-son-environnement" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Présentation de l’outil et de son environnement</h1>
+<section id="r-et-rstudio" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="r-et-rstudio"><span class="header-section-number">1.1</span> R et RStudio</h2>
+<p><a href="https://rcarto.github.io/R_et_RStudio/index.html">Diaporama</a></p>
 </section>
-<section id="préparation-des-données" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="préparation-des-données"><span class="header-section-number">2</span> Préparation des données</h2>
-<section id="téléchargement-des-données" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="téléchargement-des-données"><span class="header-section-number">2.1</span> Téléchargement des données</h3>
-<div class="cell">
+<section id="lécosystème-spatial-de-r" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="lécosystème-spatial-de-r"><span class="header-section-number">1.2</span> L’Écosystème spatial de R</h2>
+<p><a href="https://elementr.gitpages.huma-num.fr/session_1/rspatial/">Diaporama</a></p>
+</section>
+</section>
+<section id="exemple-danalyse" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Exemple d’analyse</h1>
+<p>Nous voulons étudier les déplacements effectué en covoiturage. Nous nous concentrerons sur les durées, distances et vitesses de ces déplacements.</p>
+<section id="préparation-des-données" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="préparation-des-données"><span class="header-section-number">2.1</span> Préparation des données</h2>
+<section id="téléchargement-des-données" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="téléchargement-des-données"><span class="header-section-number">2.1.1</span> Téléchargement des données</h3>
+<p>Nous téléchargeons les données pour les mois de septembre, octobre et novembre 2022.</p>
+<div class="cell" data-hash="index_cache/html/download_07dcde6a2769ac0a70de0f09e685125a">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"data-raw"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>cov_2022_11 <span class="ot">&lt;-</span> <span class="st">"https://www.data.gouv.fr/fr/datasets/r/5d469743-9636-4e84-841c-2ae1111b4009"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cov_2022_10 <span class="ot">&lt;-</span> <span class="st">"https://www.data.gouv.fr/fr/datasets/r/80b38046-8166-49fd-bbee-fc0ba9612a88"</span></span>
@@ -192,9 +234,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(cov_2022_09, <span class="at">destfile =</span> <span class="st">"data-raw/cov_2022_09.csv"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="import-des-données" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="import-des-données"><span class="header-section-number">2.2</span> Import des données</h3>
-<div class="cell">
+<section id="import-des-données" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="import-des-données"><span class="header-section-number">2.1.2</span> Import des données</h3>
+<p>Une fois les données téléchargées nous pouvons les importer dans R.</p>
+<div class="cell" data-hash="index_cache/html/import_73c9d520ef77e6621cc27c49a443fac7">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cov_raw_1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"data-raw/cov_2022_09.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>cov_raw_2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"data-raw/cov_2022_10.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cov_raw_3 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"data-raw/cov_2022_11.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
@@ -202,71 +245,143 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>cov_raw <span class="ot">&lt;-</span> <span class="fu">rbind</span>(cov_raw_1, cov_raw_2, cov_raw_3)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="découverte-du-jeu-de-données" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="découverte-du-jeu-de-données"><span class="header-section-number">2.3</span> Découverte du jeu de données</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(cov_raw)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="découverte-du-jeu-de-données" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="découverte-du-jeu-de-données"><span class="header-section-number">2.1.3</span> Découverte du jeu de données</h3>
+<p>Nous pouvons étudier la structure et quelques statistiques très basiques sur le jeu de données.</p>
+<div class="cell" data-hash="index_cache/html/decouverte1_8217792c0279c0f021c02b87c8428767">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># structure du jeu de données</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(cov_raw)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1789222</code></pre>
+<pre><code>'data.frame':   1789222 obs. of  27 variables:
+ $ journey_id              : int  8481314 8539389 8481290 8481291 8481285 8497884 8481249 8481319 8485451 8481238 ...
+ $ trip_id                 : chr  "c63637d5-e8d4-4772-a350-9682191f73ef" "9bbc99b5-ebf4-4cf5-b669-854b8187a35c" "e4525811-0fae-49a5-be8b-1e5dbe7906ab" "e4525811-0fae-49a5-be8b-1e5dbe7906ab" ...
+ $ journey_start_datetime  : chr  "2022-09-01T00:00:00+02:00" "2022-09-01T00:00:00+02:00" "2022-09-01T00:00:00+02:00" "2022-09-01T00:00:00+02:00" ...
+ $ journey_start_date      : chr  "2022-09-01" "2022-09-01" "2022-09-01" "2022-09-01" ...
+ $ journey_start_time      : chr  "00:00:00" "00:00:00" "00:00:00" "00:00:00" ...
+ $ journey_start_lon       : num  1.07 2.77 3.14 3.14 2.38 ...
+ $ journey_start_lat       : num  49.4 48.9 48.9 48.9 48.8 ...
+ $ journey_start_insee     : int  76540 77111 77183 77183 75056 75056 34154 76540 34344 49007 ...
+ $ journey_start_department: int  76 77 77 77 75 75 34 76 34 49 ...
+ $ journey_start_town      : chr  "Rouen" "Chessy" "La Ferté-sous-Jouarre" "La Ferté-sous-Jouarre" ...
+ $ journey_start_towngroup : chr  "Métropole Rouen Normandie" "CA Val d'Europe Agglomération" "CA Coulommiers Pays de Brie" "CA Coulommiers Pays de Brie" ...
+ $ journey_start_country   : chr  "France" "France" "France" "France" ...
+ $ journey_end_datetime    : chr  "2022-09-01T00:40:00+02:00" "2022-09-01T00:10:00+02:00" "2022-09-01T00:50:00+02:00" "2022-09-01T00:50:00+02:00" ...
+ $ journey_end_date        : chr  "2022-09-01" "2022-09-01" "2022-09-01" "2022-09-01" ...
+ $ journey_end_time        : chr  "00:40:00" "00:10:00" "00:50:00" "00:50:00" ...
+ $ journey_end_lon         : num  0.966 2.667 2.674 2.674 1.963 ...
+ $ journey_end_lat         : num  49.3 48.9 48.9 48.9 48.8 ...
+ $ journey_end_insee       : int  27638 77438 77517 77517 78208 91345 34090 27638 34172 49007 ...
+ $ journey_end_department  : int  27 77 77 77 78 91 34 27 34 49 ...
+ $ journey_end_town        : chr  "Le Thuit de l'Oison" "Saint-Thibault-des-Vignes" "Villevaudé" "Villevaudé" ...
+ $ journey_end_towngroup   : chr  "CC Roumois Seine" "CA Marne et Gondoire" "CC Plaines et Monts de France" "CC Plaines et Monts de France" ...
+ $ journey_end_country     : chr  "France" "France" "France" "France" ...
+ $ passenger_seats         : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ operator_class          : chr  "C" "C" "C" "C" ...
+ $ journey_distance        : int  25476 10780 49803 49803 39093 19941 8144 28086 29696 2525 ...
+ $ journey_duration        : int  40 12 47 47 47 33 18 41 51 10 ...
+ $ has_incentive           : chr  "OUI" "OUI" "OUI" "OUI" ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(cov_raw)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="index_cache/html/decouverte2_1955f0c781c842e2cc8df613c23e8823">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># statistiques basiques</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cov_raw)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 27</code></pre>
+<pre><code>   journey_id         trip_id          journey_start_datetime
+ Min.   : 8481238   Length:1789222     Length:1789222        
+ 1st Qu.: 8988565   Class :character   Class :character      
+ Median : 9740834   Mode  :character   Mode  :character      
+ Mean   : 9672942                                            
+ 3rd Qu.:10322829                                            
+ Max.   :10854769                                            
+                                                             
+ journey_start_date journey_start_time journey_start_lon journey_start_lat
+ Length:1789222     Length:1789222     Min.   :-61.723   Min.   :-21.38   
+ Class :character   Class :character   1st Qu.:  1.068   1st Qu.: 46.52   
+ Mode  :character   Mode  :character   Median :  2.270   Median : 48.65   
+                                       Mean   :  2.854   Mean   : 46.87   
+                                       3rd Qu.:  3.510   3rd Qu.: 48.96   
+                                       Max.   : 55.825   Max.   : 51.95   
+                                                                          
+ journey_start_insee journey_start_department journey_start_town
+ Min.   : 1004       Min.   :  1.00           Length:1789222    
+ 1st Qu.:44109       1st Qu.: 44.00           Class :character  
+ Median :76020       Median : 75.00           Mode  :character  
+ Mean   :64655       Mean   : 74.17                             
+ 3rd Qu.:88327       3rd Qu.: 85.00                             
+ Max.   :99140       Max.   :974.00                             
+                     NA's   :41702                              
+ journey_start_towngroup journey_start_country journey_end_datetime
+ Length:1789222          Length:1789222        Length:1789222      
+ Class :character        Class :character      Class :character    
+ Mode  :character        Mode  :character      Mode  :character    
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+ journey_end_date   journey_end_time   journey_end_lon   journey_end_lat 
+ Length:1789222     Length:1789222     Min.   :-61.567   Min.   :-21.39  
+ Class :character   Class :character   1st Qu.:  1.069   1st Qu.: 46.53  
+ Mode  :character   Mode  :character   Median :  2.269   Median : 48.65  
+                                       Mean   :  2.854   Mean   : 46.87  
+                                       3rd Qu.:  3.510   3rd Qu.: 48.96  
+                                       Max.   : 55.826   Max.   : 51.99  
+                                                                         
+ journey_end_insee journey_end_department journey_end_town  
+ Min.   : 1004     Min.   :  1.00         Length:1789222    
+ 1st Qu.:44109     1st Qu.: 44.00         Class :character  
+ Median :76057     Median : 75.00         Mode  :character  
+ Mean   :64794     Mean   : 74.27                           
+ 3rd Qu.:89206     3rd Qu.: 85.00                           
+ Max.   :99140     Max.   :974.00                           
+                   NA's   :44592                            
+ journey_end_towngroup journey_end_country passenger_seats operator_class    
+ Length:1789222        Length:1789222      Min.   :1       Length:1789222    
+ Class :character      Class :character    1st Qu.:1       Class :character  
+ Mode  :character      Mode  :character    Median :1       Mode  :character  
+                                           Mean   :1                         
+                                           3rd Qu.:1                         
+                                           Max.   :4                         
+                                                                             
+ journey_distance  journey_duration has_incentive     
+ Min.   :      0   Min.   :  0.00   Length:1789222    
+ 1st Qu.:  10066   1st Qu.: 17.00   Class :character  
+ Median :  20245   Median : 26.00   Mode  :character  
+ Mean   :  24848   Mean   : 29.44                     
+ 3rd Qu.:  33140   3rd Qu.: 38.00                     
+ Max.   :1038359   Max.   :716.00                     
+                                                      </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(cov_raw)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Intéressons nous plus particulièrement aux distances et durées des trajets.</p>
+<div class="cell" data-hash="index_cache/html/decouverte3_6ad596b13132a9ae43195800f326bbeb">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cov_raw<span class="sc">$</span>journey_distance)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "journey_id"               "trip_id"                 
- [3] "journey_start_datetime"   "journey_start_date"      
- [5] "journey_start_time"       "journey_start_lon"       
- [7] "journey_start_lat"        "journey_start_insee"     
- [9] "journey_start_department" "journey_start_town"      
-[11] "journey_start_towngroup"  "journey_start_country"   
-[13] "journey_end_datetime"     "journey_end_date"        
-[15] "journey_end_time"         "journey_end_lon"         
-[17] "journey_end_lat"          "journey_end_insee"       
-[19] "journey_end_department"   "journey_end_town"        
-[21] "journey_end_towngroup"    "journey_end_country"     
-[23] "passenger_seats"          "operator_class"          
-[25] "journey_distance"         "journey_duration"        
-[27] "has_incentive"           </code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      0   10066   20245   24848   33140 1038359 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cov_raw, <span class="dv">1</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cov_raw<span class="sc">$</span>journey_duration)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  journey_id                              trip_id    journey_start_datetime
-1    8481314 c63637d5-e8d4-4772-a350-9682191f73ef 2022-09-01T00:00:00+02:00
-  journey_start_date journey_start_time journey_start_lon journey_start_lat
-1         2022-09-01           00:00:00             1.071            49.444
-  journey_start_insee journey_start_department journey_start_town
-1               76540                       76              Rouen
-    journey_start_towngroup journey_start_country      journey_end_datetime
-1 Métropole Rouen Normandie                France 2022-09-01T00:40:00+02:00
-  journey_end_date journey_end_time journey_end_lon journey_end_lat
-1       2022-09-01         00:40:00           0.966          49.276
-  journey_end_insee journey_end_department    journey_end_town
-1             27638                     27 Le Thuit de l'Oison
-  journey_end_towngroup journey_end_country passenger_seats operator_class
-1      CC Roumois Seine              France               1              C
-  journey_distance journey_duration has_incentive
-1            25476               40           OUI</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   0.00   17.00   26.00   29.44   38.00  716.00 </code></pre>
 </div>
+</div>
+<p>Les valeurs minimums de ces variables sont à 0, ce n’est pas très réaliste.</p>
+</section>
+<section id="nettoyage" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="nettoyage"><span class="header-section-number">2.1.4</span> Nettoyage</h3>
+<p>Suppression des trajets inférieurs à 2 minutes ou inférieurs à 1 kilomètres.</p>
+<div class="cell" data-hash="index_cache/html/clean_8a43c3eaf49cc07b5eab9ca9c3b20f48">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cov <span class="ot">&lt;-</span> cov_raw[cov_raw<span class="sc">$</span>journey_distance <span class="sc">&gt;=</span> <span class="dv">1000</span> <span class="sc">&amp;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                 cov_raw<span class="sc">$</span>journey_duration <span class="sc">&gt;=</span> <span class="dv">2</span>, ]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="nettoyage" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="nettoyage"><span class="header-section-number">2.4</span> Nettoyage</h3>
-<p>Suppression des trajets sans durée ni distance renseignées</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cov <span class="ot">&lt;-</span> cov_raw[cov_raw<span class="sc">$</span>journey_distance <span class="sc">!=</span> <span class="dv">0</span> <span class="sc">&amp;</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                 cov_raw<span class="sc">$</span>journey_duration <span class="sc">!=</span> <span class="dv">0</span>, ]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
-</section>
-<section id="analyses" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="analyses"><span class="header-section-number">3</span> Analyses</h2>
-<section id="analyse-des-durées-distances-et-vitesses" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="analyse-des-durées-distances-et-vitesses"><span class="header-section-number">3.1</span> Analyse des durées, distances et vitesses</h3>
-<section id="calcul-des-indicateurs-gestion-des-unités-de-mesure" class="level4" data-number="3.1.1">
-<h4 data-number="3.1.1" class="anchored" data-anchor-id="calcul-des-indicateurs-gestion-des-unités-de-mesure"><span class="header-section-number">3.1.1</span> Calcul des indicateurs, gestion des unités de mesure</h4>
-<div class="cell">
+<section id="analyse-globale" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="analyse-globale"><span class="header-section-number">2.2</span> Analyse globale</h2>
+<section id="calcul-des-indicateurs-gestion-des-unités-de-mesure" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="calcul-des-indicateurs-gestion-des-unités-de-mesure"><span class="header-section-number">2.2.1</span> Calcul des indicateurs, gestion des unités de mesure</h3>
+<p>Le package <code>units</code> <span class="citation" data-cites="R-units">(<a href="#ref-R-units" role="doc-biblioref">Pebesma et al., 2016</a>)</span> permet de convertir facilement les unités de mesure.</p>
+<div class="cell" data-hash="index_cache/html/indicators_1ecd37fc9c51c9e87c3a3c46a1821672">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>duree <span class="ot">&lt;-</span> cov<span class="sc">$</span>journey_duration</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>distance <span class="ot">&lt;-</span> cov<span class="sc">$</span>journey_distance</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(units)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -280,9 +395,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>vitesse <span class="ot">&lt;-</span> distance <span class="sc">/</span> duree</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="représentations" class="level4" data-number="3.1.2">
-<h4 data-number="3.1.2" class="anchored" data-anchor-id="représentations"><span class="header-section-number">3.1.2</span> Représentations</h4>
-<div class="cell">
+<section id="représentations" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="représentations"><span class="header-section-number">2.2.2</span> Représentations</h3>
+<p>Nous pouvons calculer quelques statistiques sur nos indicateurs.</p>
+<div class="cell" data-hash="index_cache/html/table_2f44fa2733c49aef22d0bfdd90b5fe11">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">summary</span>(duree), </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summary</span>(distance), </span>
@@ -307,7 +423,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Durée (h)</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0</td>
 <td style="text-align: right;">0.3</td>
 <td style="text-align: right;">0.4</td>
 <td style="text-align: right;">0.5</td>
@@ -316,7 +432,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 <tr class="even">
 <td style="text-align: left;">Distance (km)</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.2</td>
 <td style="text-align: right;">10.1</td>
 <td style="text-align: right;">20.2</td>
 <td style="text-align: right;">24.9</td>
@@ -325,7 +441,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Vitesse (km/h)</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.1</td>
 <td style="text-align: right;">33.2</td>
 <td style="text-align: right;">44.5</td>
 <td style="text-align: right;">46.6</td>
@@ -336,7 +452,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 </div>
-<div class="cell">
+<p>Nous pouvons aussi créer rapidement des histogrammes des distributions.</p>
+<div class="cell" data-hash="index_cache/html/histograms_4b0d18bf116ccb934af608fc3fd11990">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(duree)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(distance)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(vitesse)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -350,7 +467,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="index_files/figure-html/histograms-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell">
+<p>Et finalement nous pouvons croiser les variables deux à deux avec des nuages de points.</p>
+<div class="cell" data-hash="index_cache/html/plot_dd_486d51ac10767fbe0f3a04020a45c220">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> distance, <span class="at">y =</span> duree,</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre durée et distance des trajets"</span>,</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkred"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -358,7 +476,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="index_files/figure-html/plot_dd-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-hash="index_cache/html/plot_dv_140dd01a1446d3ca7ce026ad0e03f9a5">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> distance, <span class="at">y =</span> vitesse,</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre vitesse et distance des trajets"</span>,</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkblue"</span>)</span>
@@ -370,21 +488,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="zoom-sur-la-haute-garonne" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="zoom-sur-la-haute-garonne"><span class="header-section-number">3.2</span> Zoom sur la Haute-Garonne</h3>
-<section id="sélection-des-données" class="level4" data-number="3.2.1">
-<h4 data-number="3.2.1" class="anchored" data-anchor-id="sélection-des-données"><span class="header-section-number">3.2.1</span> Sélection des données</h4>
-<p>Nous sélectionnons les trajets depuis ou vers la Haute-Garonne (31) de moins de 100 km.</p>
-<div class="cell">
+<section id="zoom-sur-la-haute-garonne" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="zoom-sur-la-haute-garonne"><span class="header-section-number">2.3</span> Zoom sur la Haute-Garonne</h2>
+<section id="sélection-des-données" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="sélection-des-données"><span class="header-section-number">2.3.1</span> Sélection des données</h3>
+<p>Nous sélectionnons les trajets depuis la Haute-Garonne (31) de moins de 100 km et de moins d’1h30.</p>
+<div class="cell" data-hash="index_cache/html/selecta31_adba225c762f7f79cbdaabec62d0c2b9">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dep <span class="ot">&lt;-</span> <span class="dv">31</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>covdep <span class="ot">&lt;-</span> cov[cov<span class="sc">$</span>journey_start_department <span class="sc">%in%</span> dep <span class="sc">&amp;</span> </span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                cov<span class="sc">$</span>journey_distance <span class="sc">&lt;=</span> <span class="dv">100000</span> <span class="sc">&amp;</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                cov<span class="sc">$</span>journey_duration <span class="sc">&lt;=</span> <span class="dv">150</span>, ]</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<blockquote class="blockquote">
+<p>Notez qu’il suffit de modifier <code>dep &lt;- 31</code> pour obtenir l’analyse sur un autre département.</p>
+</blockquote>
 </section>
-<section id="calcul-des-indicateurs-gestion-des-unités-de-mesure-1" class="level4" data-number="3.2.2">
-<h4 data-number="3.2.2" class="anchored" data-anchor-id="calcul-des-indicateurs-gestion-des-unités-de-mesure-1"><span class="header-section-number">3.2.2</span> Calcul des indicateurs, gestion des unités de mesure</h4>
-<div class="cell">
+<section id="calcul-des-indicateurs-gestion-des-unités-de-mesure-1" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="calcul-des-indicateurs-gestion-des-unités-de-mesure-1"><span class="header-section-number">2.3.2</span> Calcul des indicateurs, gestion des unités de mesure</h3>
+<div class="cell" data-hash="index_cache/html/indicators31_8f986bc3c98b541c6a97c8b11e0ecca3">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>duree <span class="ot">&lt;-</span> covdep<span class="sc">$</span>journey_duration</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>distance <span class="ot">&lt;-</span> covdep<span class="sc">$</span>journey_distance</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(units)</span>
@@ -395,9 +516,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>vitesse <span class="ot">&lt;-</span> <span class="fu">set_units</span>(vitesse, <span class="st">"km/h"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="représentations-1" class="level4" data-number="3.2.3">
-<h4 data-number="3.2.3" class="anchored" data-anchor-id="représentations-1"><span class="header-section-number">3.2.3</span> Représentations</h4>
-<div class="cell">
+<section id="représentations-1" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="représentations-1"><span class="header-section-number">2.3.3</span> Représentations</h3>
+<div class="cell" data-hash="index_cache/html/table31_190616a3bc756988a9c2b2f6fc6c4088">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">summary</span>(duree), </span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summary</span>(distance), </span>
@@ -451,7 +572,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-hash="index_cache/html/histograms31_99955c2415cff8d374dfdb224988d97d">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(duree, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">as.numeric</span>(duree))<span class="sc">+</span><span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(distance, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">1</span>))</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(vitesse, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">as.numeric</span>(vitesse)<span class="sc">+</span><span class="dv">1</span>),<span class="dv">1</span>))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -465,7 +586,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="index_files/figure-html/histograms31-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-hash="index_cache/html/plot_dd31_e5b27defe5a72ae96aa24826500e3bd1">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> distance, <span class="at">y =</span> duree,</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre durée et distance des trajets"</span>,</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkred"</span>) </span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -473,7 +594,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="index_files/figure-html/plot_dd31-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-hash="index_cache/html/plot_dv31_3f87be961f4731820334a690d7c93fbc">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> distance, <span class="at">y =</span> vitesse,</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre vitesse et distance des trajets"</span>,</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">4</span>, <span class="at">col =</span> <span class="st">"white"</span>, <span class="at">bg =</span> <span class="st">"darkblue"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -482,14 +603,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="récupération-de-trajets-théoriques" class="level4" data-number="3.2.4">
-<h4 data-number="3.2.4" class="anchored" data-anchor-id="récupération-de-trajets-théoriques"><span class="header-section-number">3.2.4</span> Récupération de trajets théoriques</h4>
-<p>Nous utilisons le package osrm.</p>
-<p>Cette fonction est utile pour demander une grande quantité de routes.<br>
-Elle nécessite d’avoir accès à un serveur OSRM.</p>
-<div class="cell">
+<section id="récupération-de-trajets-théoriques" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="récupération-de-trajets-théoriques"><span class="header-section-number">2.3.4</span> Récupération de trajets théoriques</h3>
+<p>Nous utilisons le package <code>osrm</code> <span class="citation" data-cites="R-osrm">(<a href="#ref-R-osrm" role="doc-biblioref">Giraud, 2022c</a>)</span> pour récupérer les trajets par le plus court chemin entre les points de départs et d’arrivées. Ces trajets sont calculés par le logiciel OSRM (Open Source Routing Machine) <span class="citation" data-cites="luxen-vetter-2011">(<a href="#ref-luxen-vetter-2011" role="doc-biblioref">Luxen et Vetter, 2011</a>)</span> qui se base sur les données d’OpenStreetMap. Le package <code>osrm</code> sert d’interface entre R et OSRM.</p>
+<p>La fonction ci-dessous est utile pour demander une grande quantité de routes en utilisant les fonctionnalités de parallélisation de R. Pour l’utiliser il est nécessaire d’avoir accès à un serveur OSRM.</p>
+<div class="cell" data-hash="index_cache/html/nadapar_eb66f9fa30e785477c29a2549e5e6441">
 <details>
-<summary>Show the code</summary>
+<summary>Fonction d’extraction des routes en masse</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>get_routes <span class="ot">&lt;-</span> <span class="cf">function</span>(x, </span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">srcX =</span> <span class="st">"srcx"</span>, <span class="at">srcY =</span> <span class="st">"srcy"</span>,</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">dstX =</span> <span class="st">"dstx"</span>, <span class="at">dstY =</span> <span class="st">"dsty"</span>, </span>
@@ -529,167 +649,220 @@ Elle nécessite d’avoir accès à un serveur OSRM.</p>
 <span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Pour la réutilisation nous enregistrons les routes</p>
-<div class="cell">
+<p>Nous pouvons maintenant extraire les routes avec la fonction <code>get_routes()</code>.</p>
+<div class="cell" data-hash="index_cache/html/nadagetroadsnope_2f6e2fc4d8b3de0c84a2265100f4a34e">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">get_routes</span>(<span class="at">x =</span> covdep, </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">srcX =</span> <span class="st">"journey_start_lon"</span>, </span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">srcY =</span> <span class="st">"journey_start_lat"</span>,</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dstX =</span> <span class="st">"journey_end_lon"</span>, </span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dstY =</span> <span class="st">"journey_end_lat"</span>, </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ncl =</span> <span class="dv">7</span>)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(<span class="at">obj =</span> roads, </span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">dsn =</span> <span class="st">"data/road.gpkg"</span>, </span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">layer =</span> <span class="fu">paste0</span>(<span class="st">"road_"</span>,dep), </span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">append =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(roads, <span class="st">"EPSG:3857"</span>)</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stplanr)</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>roads<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>roads_n <span class="ot">&lt;-</span> <span class="fu">overline</span>(<span class="at">sl =</span> roads, <span class="at">attrib =</span> <span class="st">"n"</span>, <span class="at">ncores =</span> <span class="dv">8</span>)</span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(<span class="at">obj =</span> roads_n, </span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">dsn =</span> <span class="st">"data/road.gpkg"</span>, </span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">layer =</span> <span class="fu">paste0</span>(<span class="st">"road_"</span>,dep,<span class="st">"_ag"</span>), </span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">append =</span> <span class="cn">FALSE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ncl =</span> <span class="dv">7</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Affichons 3 trajets au hasard. Pour les visualiser nous utilisons le package <code>sf</code> <span class="citation" data-cites="R-sf">(<a href="#ref-R-sf" role="doc-biblioref">Pebesma, 2018</a>)</span>.</p>
+<div class="cell" data-hash="index_cache/html/trestrajos_67c35dfee399d37268c893dbde6d2fff">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(roads[<span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>,]))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/trestrajos-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Cette opération d’extraction étant assez lourde nous pouvons sauvegarder son résultat pour une utilisation ultérieure.</p>
+<div class="cell" data-hash="index_cache/html/nadagetroads_46242fd32a2b452e6201863a727cdbb7">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(<span class="at">obj =</span> roads, </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">dsn =</span> <span class="st">"data/road.gpkg"</span>, </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">layer =</span> <span class="fu">paste0</span>(<span class="st">"road_"</span>,dep), </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">append =</span> <span class="cn">FALSE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="nettoyage-1" class="level4" data-number="3.2.5">
-<h4 data-number="3.2.5" class="anchored" data-anchor-id="nettoyage-1"><span class="header-section-number">3.2.5</span> Nettoyage</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Linking to GEOS 3.9.0, GDAL 3.2.2, PROJ 7.2.1; sf_use_s2() is TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/road.gpkg"</span>, <span class="at">layer =</span> <span class="fu">paste0</span>(<span class="st">"road_"</span>,dep))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Reading layer `road_31' from data source 
-  `/home/tim/Documents/prz/JEGeovizRennes_R_2022/data/road.gpkg' 
-  using driver `GPKG'
-Simple feature collection with 28917 features and 4 fields
-Geometry type: LINESTRING
-Dimension:     XY
-Bounding box:  xmin: 0.02145 ymin: 42.91866 xmax: 2.34512 ymax: 44.16299
-Geodetic CRS:  WGS 84</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>roads_n <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/road.gpkg"</span>, <span class="at">layer =</span> <span class="fu">paste0</span>(<span class="st">"road_"</span>,dep, <span class="st">"_ag"</span>))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Reading layer `road_31_ag' from data source 
-  `/home/tim/Documents/prz/JEGeovizRennes_R_2022/data/road.gpkg' 
-  using driver `GPKG'
-Simple feature collection with 19307 features and 1 field
-Geometry type: LINESTRING
-Dimension:     XY
-Bounding box:  xmin: 2387.803 ymin: 5299599 xmax: 261057.6 ymax: 5490700
-Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
-</div>
+<section id="import-des-trajets-pré-enregistrés" class="level3" data-number="2.3.5">
+<h3 data-number="2.3.5" class="anchored" data-anchor-id="import-des-trajets-pré-enregistrés"><span class="header-section-number">2.3.5</span> (Import des trajets pré-enregistrés)</h3>
+<div class="cell" data-hash="index_cache/html/importroadspourdefaux_0ca86f49ad086490c39932b7ccfb4dff">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/road.gpkg"</span>, <span class="at">layer =</span> <span class="fu">paste0</span>(<span class="st">"road_"</span>,dep))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="comparaison" class="level4" data-number="3.2.6">
-<h4 data-number="3.2.6" class="anchored" data-anchor-id="comparaison"><span class="header-section-number">3.2.6</span> Comparaison</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(roads<span class="sc">$</span>duration) <span class="ot">&lt;-</span> <span class="st">"min"</span> </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(roads<span class="sc">$</span>distance) <span class="ot">&lt;-</span> <span class="st">"km"</span> </span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(duree, <span class="fu">round</span>(roads<span class="sc">$</span>duration,<span class="dv">2</span>), <span class="at">asp =</span> <span class="dv">1</span>, </span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">5</span>, <span class="at">col =</span> <span class="st">"white"</span>,</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg =</span> <span class="st">"darkred"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>))</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="comparaison-des-trajets-réels-et-théoriques" class="level3" data-number="2.3.6">
+<h3 data-number="2.3.6" class="anchored" data-anchor-id="comparaison-des-trajets-réels-et-théoriques"><span class="header-section-number">2.3.6</span> Comparaison des trajets réels et théoriques</h3>
+<p>Nous pouvons maintenant comparer les distances et les durées réeeles et théoriques.</p>
+<div class="cell" data-hash="index_cache/html/graphroadsosrm_9f39f50b5b9d6e33c1c021fc62b3110c">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(roads<span class="sc">$</span>duration) <span class="ot">&lt;-</span> <span class="st">"min"</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(roads<span class="sc">$</span>distance) <span class="ot">&lt;-</span> <span class="st">"km"</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>duree_osrm <span class="ot">&lt;-</span> <span class="fu">round</span>(roads<span class="sc">$</span>duration,<span class="dv">2</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>distance_osrm <span class="ot">&lt;-</span> roads<span class="sc">$</span>distance</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(duree, duree_osrm, <span class="at">asp =</span> <span class="dv">1</span>, </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">5</span>, <span class="at">col =</span> <span class="st">"white"</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg =</span> <span class="st">"darkred"</span>, </span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>), </span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre durées réelles et théoriques"</span>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/graphroadsosrm-1.png" class="img-fluid" width="480"></p>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(distance, roads<span class="sc">$</span>distance, <span class="at">asp =</span> <span class="dv">1</span>, </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">5</span>, <span class="at">col =</span> <span class="st">"white"</span>, </span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg =</span> <span class="st">"darkblue"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>),</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>))</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(distance, distance_osrm, <span class="at">asp =</span> <span class="dv">1</span>, </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> .<span class="dv">5</span>, <span class="at">col =</span> <span class="st">"white"</span>, </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg =</span> <span class="st">"darkblue"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Rapport entre distances réelles et théoriques"</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/graphroadsosrm-2.png" class="img-fluid" width="480"></p>
 </div>
 </div>
 </section>
-<section id="carto" class="level4" data-number="3.2.7">
-<h4 data-number="3.2.7" class="anchored" data-anchor-id="carto"><span class="header-section-number">3.2.7</span> Carto</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>covdep_start <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(covdep, </span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">coords  =</span> <span class="fu">c</span>(<span class="st">'journey_start_lon'</span>, <span class="st">'journey_start_lat'</span>), </span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">crs =</span> <span class="st">"EPSG:4326"</span>, <span class="at">remove =</span> F)</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>covdep_end <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(covdep, </span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coords  =</span> <span class="fu">c</span>(<span class="st">'journey_end_lon'</span>, <span class="st">'journey_end_lat'</span>), </span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">crs =</span> <span class="st">"EPSG:4326"</span>, <span class="at">remove =</span> F)</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>covdep_start <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(covdep_start, <span class="st">"EPSG:3857"</span>)</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>covdep_end <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(covdep_end, <span class="st">"EPSG:3857"</span>)</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co"># centroids des départs </span></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>city <span class="ot">&lt;-</span> <span class="fu">tapply</span>(<span class="at">X =</span> covdep<span class="sc">$</span>trip_id, </span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">INDEX =</span> covdep<span class="sc">$</span>journey_start_towngroup, </span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">FUN =</span> length) <span class="sc">|&gt;</span></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort</span>(<span class="at">decreasing =</span> <span class="cn">TRUE</span>)<span class="sc">|&gt;</span></span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()<span class="sc">|&gt;</span></span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">1</span>)</span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>zone <span class="ot">&lt;-</span> covdep_start <span class="sc">|&gt;</span></span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(journey_start_towngroup <span class="sc">%in%</span> city) <span class="sc">|&gt;</span></span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_geometry</span>() <span class="sc">|&gt;</span></span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_union</span>() <span class="sc">|&gt;</span></span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_centroid</span>() <span class="sc">|&gt;</span></span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_buffer</span>(<span class="dv">30000</span>) <span class="sc">|&gt;</span></span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_sf</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="cartographie-1" class="level3" data-number="2.3.7">
+<h3 data-number="2.3.7" class="anchored" data-anchor-id="cartographie-1"><span class="header-section-number">2.3.7</span> Cartographie 1</h3>
+<p>Sur une première carte nous montrerons les tronçons de routes empruntés par les usagers du covoiturage dans la zone où a lieu le plus grand nombre de départs dans le département.</p>
+<section id="trouver-la-zone-ou-a-lieu-le-plus-grand-nombre-de-départs" class="level4" data-number="2.3.7.1">
+<h4 data-number="2.3.7.1" class="anchored" data-anchor-id="trouver-la-zone-ou-a-lieu-le-plus-grand-nombre-de-départs"><span class="header-section-number">2.3.7.1</span> Trouver la zone ou a lieu le plus grand nombre de départs</h4>
+<p>Création d’une couche de points des lieux de départs :</p>
+<div class="cell" data-hash="index_cache/html/tlse_c5e0cb53ba0f3ad4710757db03317299">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>covdep_start <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(covdep, </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">coords  =</span> <span class="fu">c</span>(<span class="st">'journey_start_lon'</span>, <span class="st">'journey_start_lat'</span>), </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">crs =</span> <span class="st">"EPSG:4326"</span>, <span class="at">remove =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># reprojection en webmercator</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>covdep_start <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(covdep_start, <span class="st">"EPSG:3857"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><em>Towngroup</em> où ont lieux le plus de départs :</p>
+<div class="cell" data-hash="index_cache/html/tlse1_6e902d7acff228e949e717be889af06a">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggrégation des départ par towngroup </span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># et sélection du towngroup ayant le plus de départs</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>city <span class="ot">&lt;-</span> <span class="fu">tapply</span>(<span class="at">X =</span> covdep<span class="sc">$</span>trip_id, </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">INDEX =</span> covdep<span class="sc">$</span>journey_start_towngroup, </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">FUN =</span> length) <span class="sc">|&gt;</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort</span>(<span class="at">decreasing =</span> <span class="cn">TRUE</span>)<span class="sc">|&gt;</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()<span class="sc">|&gt;</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">1</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>city</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Toulouse Métropole"</code></pre>
+</div>
+</div>
+<p>Création d’une zone de 30 km autour du centroide des départs de la zone :</p>
+<div class="cell" data-hash="index_cache/html/tlse2_7ba9801f2492176e2136269ec6070d1b">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>zone <span class="ot">&lt;-</span> covdep_start <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(journey_start_towngroup <span class="sc">%in%</span> city) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_union</span>() <span class="sc">|&gt;</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_centroid</span>() <span class="sc">|&gt;</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_buffer</span>(<span class="dv">30000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_sf</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="télécharger-des-tuiles-raster-pour-le-fond-de-carte" class="level4" data-number="2.3.7.2">
+<h4 data-number="2.3.7.2" class="anchored" data-anchor-id="télécharger-des-tuiles-raster-pour-le-fond-de-carte"><span class="header-section-number">2.3.7.2</span> Télécharger des tuiles raster pour le fond de carte</h4>
+<p>Téléchargement de tuiles raster (Terrain Background de chez Stamen) sur la zone. Nous utilisons le package <code>maptiles</code> <span class="citation" data-cites="R-maptiles">(<a href="#ref-R-maptiles" role="doc-biblioref">Giraud, 2022b</a>)</span> pour cela :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maptiles)</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>osm <span class="ot">&lt;-</span> <span class="fu">get_tiles</span>(zone, </span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">provider =</span> <span class="st">"Stamen.TerrainBackground"</span>, </span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">zoom =</span> <span class="dv">10</span>)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">zoom =</span> <span class="dv">11</span>, </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">cachedir =</span> <span class="st">"tiles"</span>, <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Zoom:11
+Data and map tiles sources:
+Map tiles by Stamen Design CC BY 3.0 — Map data © OpenStreetMap contributors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_tiles</span>(osm)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/osmT-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Nous pouvons ensuite découper les tuiles en fonction de la zone définie précédement. Pour cela nous utilisons le package <code>terra</code> <span class="citation" data-cites="R-terra">(<a href="#ref-R-terra" role="doc-biblioref">Hijmans, 2022</a>)</span> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>terra 1.6.47</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>osm_r <span class="ot">&lt;-</span> osm <span class="sc">|&gt;</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mask</span>(zone) <span class="sc">|&gt;</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crop</span>(zone)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>osm_r <span class="ot">&lt;-</span> osm <span class="sc">|&gt;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mask</span>(zone) <span class="sc">|&gt;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">crop</span>(zone)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapsf)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>roads_n_in <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(roads_n, <span class="fu">st_geometry</span>(zone))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: attribute variables are assumed to be spatially constant throughout all
-geometries</code></pre>
+<p>Nous pouvons ensuite visualiser les tuiles et la zone grace au package <code>mapsf</code> <span class="citation" data-cites="R-mapsf">(<a href="#ref-R-mapsf" role="doc-biblioref">Giraud, 2022a</a>)</span>.</p>
+<div class="cell" data-hash="index_cache/html/osmT3_4a1fa2899bcca75aec674976171e8188">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapsf)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># définition d'un thème</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>theme <span class="ot">&lt;-</span> <span class="fu">mf_theme</span>(<span class="st">"green"</span>,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>), </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">line =</span> <span class="dv">2</span>, </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cex =</span> <span class="fl">1.8</span>, </span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">inner =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">pos =</span> <span class="st">"left"</span>)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_init</span>(zone)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_raster</span>(osm_r, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(zone, <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">15</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/osmT3-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>maxv <span class="ot">&lt;-</span> <span class="fu">max</span>(roads_n_in<span class="sc">$</span>n)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>credits <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"T. Giraud, 2023</span><span class="sc">\n</span><span class="st">"</span>, </span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">get_credit</span>(<span class="st">"Stamen.TerrainBackground"</span>), <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>,</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Registre de Preuve de Covoiturage (DGITM) - "</span>, </span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Au départ du département, pour moins de 100 km et "</span>,</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"moins d'1H30, "</span>,</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"de septembre à novembre 2022"</span>)</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>theme <span class="ot">&lt;-</span> <span class="fu">mf_theme</span>(<span class="st">"green"</span>, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">0</span>), </span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">line =</span> <span class="dv">2</span>, <span class="at">cex =</span> <span class="fl">1.8</span>, <span class="at">inner =</span> <span class="cn">FALSE</span>, <span class="at">pos =</span> <span class="st">"left"</span>)</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_export</span>(zone, <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="st">"map"</span>, dep, <span class="st">".png"</span>), </span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">700</span>, <span class="at">height =</span> <span class="dv">658</span>, </span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">expandBB =</span> <span class="fu">c</span>(.<span class="dv">05</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), <span class="at">theme =</span> theme)</span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_raster</span>(osm_r, <span class="at">add =</span> T)</span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(roads_n_in, <span class="st">'n'</span>, <span class="st">'prop'</span>, <span class="at">leg_pos =</span> <span class="st">"topright"</span>, <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Nombre de</span><span class="sc">\n</span><span class="st">covoiturages</span><span class="sc">\n</span><span class="st">par tronçon"</span>, <span class="at">leg_frame =</span> T, </span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">val_max =</span> maxv)</span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(city)</span>
-<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(credits, <span class="at">bg =</span> <span class="fu">mf_theme</span>()<span class="sc">$</span>bg)</span>
-<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> zone, <span class="at">col  =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">15</span>, <span class="at">add =</span> T)</span>
-<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>(<span class="dv">5</span>)</span>
-<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>png 
-  2 </code></pre>
 </div>
+</section>
+<section id="agrégation-des-tronçons" class="level4" data-number="2.3.7.3">
+<h4 data-number="2.3.7.3" class="anchored" data-anchor-id="agrégation-des-tronçons"><span class="header-section-number">2.3.7.3</span> Agrégation des tronçons</h4>
+<p>Nous devons maintenant agréger les tronçons de route se superposant et compter le nombre de superposition par tronçons. Pour cela nous utilisons le package <code>stplanr</code> <span class="citation" data-cites="R-stplanr">(<a href="#ref-R-stplanr" role="doc-biblioref">Robin Lovelace et Richard Ellison, 2018</a>)</span>. Cette opéaration est assez lourde, nous enregristrons son résultat pour une utilisation ultérieure :</p>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-1_14c8cf4c384101db60493a415fb1fe7a">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reprojection en webmercator</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(roads, <span class="st">"EPSG:3857"</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># découage des route à la limite de la zone</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(roads, <span class="fu">st_geometry</span>(zone))</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co"># keep only linestrings</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_collection_extract</span>(roads, <span class="st">"LINESTRING"</span>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Agrégation des tronçons</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stplanr)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>roads<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>roads_n <span class="ot">&lt;-</span> <span class="fu">overline</span>(<span class="at">sl =</span> roads, <span class="at">attrib =</span> <span class="st">"n"</span>, <span class="at">ncores =</span> <span class="dv">8</span>)</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Sauvegarder le résultat</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(<span class="at">obj =</span> roads_n, </span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">dsn =</span> <span class="st">"data/road.gpkg"</span>, </span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">layer =</span> <span class="fu">paste0</span>(<span class="st">"road_"</span>,dep,<span class="st">"_ag"</span>), </span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">append =</span> <span class="cn">FALSE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>(Import des tronçons agrégés)</p>
+<div class="cell" data-hash="index_cache/html/importroads_f8735db9f721b87afa6d40a775cc3b45">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>roads_n <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/road.gpkg"</span>, </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">layer =</span> <span class="fu">paste0</span>(<span class="st">"road_"</span>,dep, <span class="st">"_ag"</span>), </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="création-de-la-carte" class="level4" data-number="2.3.7.4">
+<h4 data-number="2.3.7.4" class="anchored" data-anchor-id="création-de-la-carte"><span class="header-section-number">2.3.7.4</span> Création de la carte</h4>
+<div class="cell" data-hash="index_cache/html/osmap_444b6bf7b7daeac80383004079892284">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valeur max</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>maxv <span class="ot">&lt;-</span> <span class="fu">max</span>(roads_n<span class="sc">$</span>n)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Credits de la carte</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>credits <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"T. Giraud, 2023</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">get_credit</span>(<span class="st">"Stamen.TerrainBackground"</span>), <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>,</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Registre de Preuve de Covoiturage (DGITM) - "</span>, </span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Au départ du département, pour moins de 100 km et "</span>,</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"moins d'1H30, "</span>,</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"de septembre à novembre 2022"</span>)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_export</span>(zone, <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="st">"map"</span>, dep, <span class="st">".png"</span>), </span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">700</span>, <span class="at">expandBB =</span> <span class="fu">c</span>(.<span class="dv">05</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), </span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">theme =</span> theme)</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_raster</span>(osm_r, <span class="at">add =</span> T)</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> roads_n, <span class="at">var =</span> <span class="st">'n'</span>, <span class="at">type =</span> <span class="st">'prop'</span>, </span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">val_max =</span> maxv, <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_pos =</span> <span class="st">"topright"</span>, </span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Nombre de</span><span class="sc">\n</span><span class="st">covoiturages</span><span class="sc">\n</span><span class="st">par tronçon"</span>, </span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_frame =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(city)</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(credits, <span class="at">bg =</span> <span class="fu">mf_theme</span>()<span class="sc">$</span>bg)</span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> zone, <span class="at">col  =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">15</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>(<span class="dv">5</span>)</span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="map31.png" class="img-fluid" width="700"></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: spatstat.data</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: spatstat.geom</code></pre>
-</div>
+</section>
+</section>
+<section id="cartographie-2" class="level3" data-number="2.3.8">
+<h3 data-number="2.3.8" class="anchored" data-anchor-id="cartographie-2"><span class="header-section-number">2.3.8</span> Cartographie 2</h3>
+<p>Sur une deuxième carte nous allons représenté la densité des points de départs en utilisant la méthode KDE.</p>
+<section id="calcul-du-kde" class="level4" data-number="2.3.8.1">
+<h4 data-number="2.3.8.1" class="anchored" data-anchor-id="calcul-du-kde"><span class="header-section-number">2.3.8.1</span> Calcul du KDE</h4>
+<p>Pour cela nous utilisons le package <code>spatstat</code> <span class="citation" data-cites="R-spatstat">(<a href="#ref-R-spatstat" role="doc-biblioref">Baddeley et Turner, 2005</a>)</span> :</p>
+<div class="cell" data-hash="index_cache/html/liss_89616607b941af775558f0b03c7ffee7">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"spatstat"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>spatstat.geom 3.0-3</code></pre>
 </div>
@@ -703,31 +876,13 @@ Attaching package: 'spatstat.geom'</code></pre>
     area, delaunay, rescale, rotate, shift, where.max, where.min</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: spatstat.random</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
 <pre><code>spatstat.random 3.0-1</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: spatstat.explore</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: nlme</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>spatstat.explore 3.0-5</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: spatstat.model</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: rpart</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
 <pre><code>spatstat.model 3.0-2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: spatstat.linnet</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>spatstat.linnet 3.0-3</code></pre>
@@ -737,61 +892,172 @@ Attaching package: 'spatstat.geom'</code></pre>
 spatstat 3.0-2 
 For an introduction to spatstat, type 'beginner' </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(<span class="fu">st_coordinates</span>(covdep_start), </span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">W =</span> <span class="fu">as.owin</span>(zone))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transformation des points sf en points spatstat</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(<span class="fu">st_coordinates</span>(covdep_start), <span class="at">W =</span> <span class="fu">as.owin</span>(zone))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 1751 points were rejected as lying outside the specified window</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: data contain duplicated points</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">density.ppp</span>(p, <span class="at">sigma =</span> <span class="dv">1000</span>, <span class="at">eps =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">100</span>), <span class="at">positive =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>rasdens <span class="ot">&lt;-</span> <span class="fu">rast</span>(ds) <span class="sc">*</span> <span class="dv">1000</span> <span class="sc">*</span> <span class="dv">1000</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(rasdens) <span class="ot">&lt;-</span> <span class="st">'EPSG:3857'</span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">values</span>(rasdens)</span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>bks <span class="ot">&lt;-</span> <span class="fu">mf_get_breaks</span>(v[v<span class="sc">&gt;</span><span class="dv">5</span>], <span class="at">nbreaks =</span> <span class="dv">8</span>, <span class="at">breaks =</span> <span class="st">"geom"</span>)</span>
-<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>bks <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(<span class="dv">0</span>,bks))</span>
-<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">hcl.colors</span>(<span class="at">n =</span> <span class="fu">length</span>(bks)<span class="sc">-</span><span class="dv">1</span>, <span class="st">"Inferno"</span>, <span class="at">rev=</span>F)</span>
-<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tanaka)</span>
-<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>credits <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"T. Giraud, 2023</span><span class="sc">\n</span><span class="st">"</span>, </span>
-<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Registre de Preuve de Covoiturage (DGITM)</span><span class="sc">\n</span><span class="st">"</span>, </span>
-<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Au départ du département, pour moins de 100 km et "</span>,</span>
-<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"moins d'1H30, "</span>,</span>
-<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"de septembre à novembre 2022"</span>)</span>
-<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_export</span>(zone, <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="st">"map"</span>, dep, <span class="st">"dens.png"</span>), </span>
-<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">700</span>, <span class="at">height =</span> <span class="dv">658</span>, </span>
-<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">expandBB =</span> <span class="fu">c</span>(.<span class="dv">05</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), <span class="at">theme =</span> theme)</span>
-<span id="cb63-17"><a href="#cb63-17" aria-hidden="true" tabindex="-1"></a><span class="fu">tanaka</span>(rasdens, <span class="at">breaks =</span> bks, <span class="at">col =</span> cols, </span>
-<span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend.pos =</span> <span class="st">"n"</span>, <span class="at">mask =</span> zone, </span>
-<span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_legend</span>(<span class="at">type =</span> <span class="st">"choro"</span>, <span class="at">pos =</span> <span class="st">"topright"</span>,</span>
-<span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">val =</span> bks,<span class="at">pal =</span> cols, </span>
-<span id="cb63-22"><a href="#cb63-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Densité de départs</span><span class="sc">\n</span><span class="st">"</span>, </span>
-<span id="cb63-23"><a href="#cb63-23" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"KDE, sigma=1km</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb63-24"><a href="#cb63-24" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"(départs par km2)"</span>),</span>
-<span id="cb63-25"><a href="#cb63-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">val_rnd =</span> <span class="dv">0</span>)</span>
-<span id="cb63-26"><a href="#cb63-26" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(roads_n_in, <span class="st">'n'</span>, <span class="st">'prop'</span>, <span class="at">col =</span> <span class="st">"#ffffff50"</span>,</span>
-<span id="cb63-27"><a href="#cb63-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Nombre de</span><span class="sc">\n</span><span class="st">covoiturages</span><span class="sc">\n</span><span class="st">par tronçon"</span>, </span>
-<span id="cb63-28"><a href="#cb63-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">val_max =</span> maxv, <span class="at">leg_pos =</span> <span class="st">"right"</span>)</span>
-<span id="cb63-29"><a href="#cb63-29" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(city)</span>
-<span id="cb63-30"><a href="#cb63-30" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(credits, <span class="at">bg =</span> <span class="fu">mf_theme</span>()<span class="sc">$</span>bg)</span>
-<span id="cb63-31"><a href="#cb63-31" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> zone, <span class="at">col  =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">15</span>, <span class="at">add =</span> T)</span>
-<span id="cb63-32"><a href="#cb63-32" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>(<span class="dv">5</span>)</span>
-<span id="cb63-33"><a href="#cb63-33" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calcul du KDE</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">density.ppp</span>(p, <span class="at">sigma =</span> <span class="dv">1000</span>, <span class="at">eps =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">100</span>), <span class="at">positive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>rasdens <span class="ot">&lt;-</span> <span class="fu">rast</span>(ds) <span class="sc">*</span> <span class="dv">1000</span> <span class="sc">*</span> <span class="dv">1000</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(rasdens) <span class="ot">&lt;-</span> <span class="st">'EPSG:3857'</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rasdens)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/liss-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="cartographie" class="level4" data-number="2.3.8.2">
+<h4 data-number="2.3.8.2" class="anchored" data-anchor-id="cartographie"><span class="header-section-number">2.3.8.2</span> Cartographie</h4>
+<p>Nous utlisons le package <code>tanaka</code> <span class="citation" data-cites="R-tanaka">(<a href="#ref-R-tanaka" role="doc-biblioref">Giraud, 2022d</a>)</span> pour représenter le KDE avec un effet pseudo 3D :</p>
+<div class="cell" data-hash="index_cache/html/liss2_e54d6e1a98405856f0c2f9edc4375f6d">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calcul des bornes des classes</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">values</span>(rasdens)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>bks <span class="ot">&lt;-</span> <span class="fu">mf_get_breaks</span>(v[v<span class="sc">&gt;</span><span class="dv">5</span>], <span class="at">nbreaks =</span> <span class="dv">8</span>, <span class="at">breaks =</span> <span class="st">"geom"</span>)</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>bks <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(<span class="dv">0</span>,bks))</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># création d'une palette de couleurs</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">hcl.colors</span>(<span class="at">n =</span> <span class="fu">length</span>(bks)<span class="sc">-</span><span class="dv">1</span>, <span class="st">"Inferno"</span>, <span class="at">rev=</span>F)</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># crédits</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>credits <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"T. Giraud, 2023</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Registre de Preuve de Covoiturage (DGITM)</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Au départ du département, pour moins de 100 km et "</span>,</span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"moins d'1H30, "</span>,</span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"de septembre à novembre 2022"</span>)</span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tanaka)</span>
+<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_export</span>(zone, <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="st">"map"</span>, dep, <span class="st">"dens.png"</span>), </span>
+<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">700</span>, <span class="at">expandBB =</span> <span class="fu">c</span>(.<span class="dv">05</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), </span>
+<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">theme =</span> theme)</span>
+<span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a><span class="fu">tanaka</span>(rasdens, <span class="at">breaks =</span> bks, <span class="at">col =</span> cols, </span>
+<span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend.pos =</span> <span class="st">"n"</span>, <span class="at">mask =</span> zone, </span>
+<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb59-20"><a href="#cb59-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_legend</span>(<span class="at">type =</span> <span class="st">"choro"</span>, <span class="at">pos =</span> <span class="st">"topright"</span>,</span>
+<span id="cb59-21"><a href="#cb59-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">val =</span> bks,<span class="at">pal =</span> cols, </span>
+<span id="cb59-22"><a href="#cb59-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Densité de départs</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb59-23"><a href="#cb59-23" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"KDE, sigma=1km</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb59-24"><a href="#cb59-24" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"(départs par km2)"</span>),</span>
+<span id="cb59-25"><a href="#cb59-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">val_rnd =</span> <span class="dv">0</span>)</span>
+<span id="cb59-26"><a href="#cb59-26" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(roads_n, <span class="st">'n'</span>, <span class="st">'prop'</span>, <span class="at">col =</span> <span class="st">"#ffffff50"</span>,</span>
+<span id="cb59-27"><a href="#cb59-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Nombre de</span><span class="sc">\n</span><span class="st">covoiturages</span><span class="sc">\n</span><span class="st">par tronçon"</span>, </span>
+<span id="cb59-28"><a href="#cb59-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">val_max =</span> maxv, <span class="at">leg_pos =</span> <span class="st">"right"</span>)</span>
+<span id="cb59-29"><a href="#cb59-29" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(city)</span>
+<span id="cb59-30"><a href="#cb59-30" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(credits, <span class="at">bg =</span> <span class="fu">mf_theme</span>()<span class="sc">$</span>bg)</span>
+<span id="cb59-31"><a href="#cb59-31" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> zone, <span class="at">col  =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">15</span>, <span class="at">add =</span> T)</span>
+<span id="cb59-32"><a href="#cb59-32" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>(<span class="dv">5</span>)</span>
+<span id="cb59-33"><a href="#cb59-33" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="map31dens.png" class="img-fluid" width="700"></p>
+</section>
+</section>
+</section>
+<section id="autres-villes" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="autres-villes"><span class="header-section-number">2.4</span> Autres villes</h2>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Nantes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Montellier</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><img src="map44.png" class="img-fluid" width="700"> <img src="map44dens.png" class="img-fluid" width="700"></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><img src="map34.png" class="img-fluid" width="700"> <img src="map34dens.png" class="img-fluid" width="700"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="pour-la-reproductibilité" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="pour-la-reproductibilité"><span class="header-section-number">2.5</span> Pour la reproductibilité</h2>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-2_234fdc0c9a71c10752d7ab88868f454c">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>png 
-  2 </code></pre>
+<pre><code>R version 4.2.2 (2022-10-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Debian GNU/Linux 11 (bullseye)
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+
+locale:
+ [1] LC_CTYPE=fr_FR.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=fr_FR.UTF-8        LC_COLLATE=fr_FR.UTF-8    
+ [5] LC_MONETARY=fr_FR.UTF-8    LC_MESSAGES=fr_FR.UTF-8   
+ [7] LC_PAPER=fr_FR.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=fr_FR.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] tanaka_0.3.0           spatstat_3.0-2         spatstat.linnet_3.0-3 
+ [4] spatstat.model_3.0-2   rpart_4.1.19           spatstat.explore_3.0-5
+ [7] nlme_3.1-160           spatstat.random_3.0-1  spatstat.geom_3.0-3   
+[10] spatstat.data_3.0-0    mapsf_0.6.1            terra_1.6-47          
+[13] maptiles_0.4.0         sf_1.0-9               units_0.8-1           
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.9            lattice_0.20-45       deldir_1.0-6         
+ [4] png_0.1-8             class_7.3-20          assertthat_0.2.1     
+ [7] digest_0.6.31         utf8_1.2.2            R6_2.5.1             
+[10] evaluate_0.19         e1071_1.7-12          tensor_1.5           
+[13] highr_0.10            pillar_1.8.1          mapiso_0.2.0         
+[16] rlang_1.0.6           rstudioapi_0.14       Matrix_1.5-3         
+[19] goftest_1.2-3         rmarkdown_2.19        splines_4.2.2        
+[22] stringr_1.5.0         htmlwidgets_1.6.0     polyclip_1.10-4      
+[25] proxy_0.4-27          compiler_4.2.2        xfun_0.36            
+[28] pkgconfig_2.0.3       mgcv_1.8-41           htmltools_0.5.4      
+[31] tidyselect_1.2.0      tibble_3.1.8          codetools_0.2-18     
+[34] fansi_1.0.3           dplyr_1.0.10          grid_4.2.2           
+[37] jsonlite_1.8.4        lifecycle_1.0.3       DBI_1.1.3            
+[40] magrittr_2.0.3        KernSmooth_2.23-20    cli_3.5.0            
+[43] stringi_1.7.8         spatstat.utils_3.0-1  generics_0.1.3       
+[46] vctrs_0.5.1           tools_4.2.2           glue_1.6.2           
+[49] purrr_1.0.0           abind_1.4-5           fastmap_1.1.0        
+[52] slippymath_0.3.1      yaml_2.3.6            spatstat.sparse_3.0-0
+[55] isoband_0.2.7         classInt_0.4-8        knitr_1.41           </code></pre>
 </div>
 </div>
-<p><img src="map31dens.png" class="img-fluid"></p>
 <div class="cell">
 
 </div>
-</section>
+
 </section>
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Les références</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-R-spatstat" class="csl-entry" role="doc-biblioentry">
+Baddeley, A. et Turner, R. (2005). <span>spatstat</span>: An <span>R</span> Package for Analyzing Spatial Point Patterns. <em>Journal of Statistical Software</em>, <em>12</em>(6), 1‑42. <a href="https://doi.org/10.18637/jss.v012.i06">https://doi.org/10.18637/jss.v012.i06</a>
+</div>
+<div id="ref-R-mapsf" class="csl-entry" role="doc-biblioentry">
+Giraud, T. (2022a). <em>mapsf: Thematic Cartography</em>. <a href="https://CRAN.R-project.org/package=mapsf">https://CRAN.R-project.org/package=mapsf</a>
+</div>
+<div id="ref-R-maptiles" class="csl-entry" role="doc-biblioentry">
+Giraud, T. (2022b). <em>maptiles: Download and Display Map Tiles</em>. <a href="https://CRAN.R-project.org/package=maptiles">https://CRAN.R-project.org/package=maptiles</a>
+</div>
+<div id="ref-R-osrm" class="csl-entry" role="doc-biblioentry">
+Giraud, T. (2022c). <span>osrm: Interface Between R and the OpenStreetMap-Based Routing Service OSRM</span>. <em>Journal of Open Source Software</em>, <em>7</em>(78), 4574. <a href="https://doi.org/10.21105/joss.04574">https://doi.org/10.21105/joss.04574</a>
+</div>
+<div id="ref-R-tanaka" class="csl-entry" role="doc-biblioentry">
+Giraud, T. (2022d). <em>tanaka: Design Shaded Contour Lines (or Tanaka) Maps</em>. <a href="https://CRAN.R-project.org/package=tanaka">https://CRAN.R-project.org/package=tanaka</a>
+</div>
+<div id="ref-R-terra" class="csl-entry" role="doc-biblioentry">
+Hijmans, R. J. (2022). <em>terra: Spatial Data Analysis</em>. <a href="https://CRAN.R-project.org/package=terra">https://CRAN.R-project.org/package=terra</a>
+</div>
+<div id="ref-luxen-vetter-2011" class="csl-entry" role="doc-biblioentry">
+Luxen, D. et Vetter, C. (2011). <em>Real-time routing with OpenStreetMap data</em>. New York, NY, USA (p. 513‑516). <a href="https://doi.org/10.1145/2093973.2094062">https://doi.org/10.1145/2093973.2094062</a>
+</div>
+<div id="ref-R-sf" class="csl-entry" role="doc-biblioentry">
+Pebesma, E. (2018). <span>Simple Features for R: Standardized Support for Spatial Vector Data</span>. <em><span>The R Journal</span></em>, <em>10</em>(1), 439‑446. <a href="https://doi.org/10.32614/RJ-2018-009">https://doi.org/10.32614/RJ-2018-009</a>
+</div>
+<div id="ref-R-units" class="csl-entry" role="doc-biblioentry">
+Pebesma, E., Mailund, T. et Hiebert, J. (2016). Measurement Units in <span>R</span>. <em>R Journal</em>, <em>8</em>(2), 486‑494. <a href="https://doi.org/10.32614/RJ-2016-061">https://doi.org/10.32614/RJ-2016-061</a>
+</div>
+<div id="ref-R-stplanr" class="csl-entry" role="doc-biblioentry">
+Robin Lovelace et Richard Ellison. (2018). <span>stplanr: A Package for Transport Planning</span>. <em><span>The R Journal</span></em>, <em>10</em>(2). <a href="https://doi.org/10.32614/RJ-2018-053">https://doi.org/10.32614/RJ-2018-053</a>
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
