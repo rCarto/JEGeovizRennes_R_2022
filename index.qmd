@@ -189,6 +189,12 @@ abline(h = 110, lty = 2, lwd = .5)
 
 
 
+```{r utils2}
+#| cache: false
+#| echo: false
+knitr::opts_chunk$set(cache = TRUE)
+```
+
 
 
 ## Zoom sur la Haute-Garonne
@@ -542,7 +548,7 @@ mf_map(x = roads_n, var = 'n', type = 'prop',
        leg_frame = TRUE, 
        )
 mf_title(city)
-mf_credits(credits, bg = mf_theme()$bg)
+mf_credits(credits)
 mf_map(x = zone, col  = NA, lwd = 15, add = TRUE)
 mf_scale(5)
 dev.off()
@@ -550,16 +556,183 @@ dev.off()
 
 ![](map31.png){width="700px"}
 
-### Cartographie 2
 
-Sur une deuxième carte nous allons représenté la densité des points de départs en utilisant la méthode KDE. 
+
+### Cartographie 2
+Sur cette carte nous allons représenter le nombre de départs en agrégeant les points de départs dans un maillage régulier.
+
+#### Création d'une grille régulière
+
+```{r gridcreate}
+# superficie d'une cellule (1km2)
+cellsize <- 1e6
+grid <- st_make_grid(x = zone, 
+                     cellsize = 2 * sqrt(cellsize/((3*sqrt(3)/2))) * sqrt(3)/2, 
+                     square = FALSE) 
+# transformation sfc vers sf + ajout id
+grid <- st_sf(id = 1:length(grid), geometry = grid)
+# affichage du resultat
+mf_map(grid)
+mf_map(zone, add = TRUE, col = NA, lwd = 2, border = "red")
+```
+
+#### Découpage de la grille par la zone
+
+```{r gridcut}
+grid <- st_intersection(grid, zone)
+# affichage du resultat
+mf_map(grid)
+mf_map(zone, add = TRUE, col = NA, lwd = 2, border = "red")
+```
+
+#### Compter les points dans la grille
+```{r cptpt}
+# liste des intersections
+(inter_g_pt <- st_intersects(grid, covdep_start))
+# parcourir la liste et compter le nombre d'intersections
+grid$n_pt <- sapply(inter_g_pt, length)
+
+```
+
+
+
+#### Création de la carte
+
+```{r}
+#| results: hide
+mf_export(zone, filename = paste0("map", dep, "hexa_point.png"), 
+          width = 700, expandBB = c(.05,0,0,0.2), 
+          theme = theme)
+mf_raster(osm_r, add = TRUE)
+mf_map(grid, 
+       var = "n_pt", type = 'prop',
+       leg_pos = "topright",
+       leg_title = "Nombre de départs",
+       inches = .175, add = TRUE)
+mf_title(city)
+mf_credits(credits)
+mf_map(x = zone, col  = NA, lwd = 15, add = T)
+mf_scale(5)
+dev.off()
+```
+
+
+![](map31hexa_point.png){width="700px"}
+
+
+### Cartographie 3
+Représentons maintenant la densité de points par cellulle de notre maillage régulier. 
+Pour cela nous devons créer une variable de densité de points par km2 et la discrétiser.
+
+#### Discrétisation
+```{r discr1}
+# densité de points
+grid$dens_pt <- as.numeric(grid$n_pt / set_units(st_area(grid), "km2"))
+
+# discretisation
+v <- as.numeric(grid$dens_pt)
+boxplot(v)
+# Ne gardons que les cellule >0
+v <- v[v>0]
+htitle <- "Distribution de la densité de départs"
+hlab <- "Départs par km2"
+par(mar = c(5.1,2.1,2.1,2.1), mfrow = c(3,1))
+hist(
+  x = v, 
+  n = 50,
+  main = htitle, 
+  xlab = hlab,
+  freq = FALSE
+)
+boxplot(v, horizontal = T)
+stripchart(
+  x = v,
+  method = "jitter", 
+  pch = 21,
+  bg = "red", 
+  col = "white",
+  cex = .9
+)
+```
+
+La distribution de la variable est très dissymétrique à gauche. Utilisons une discrétisation basée sur une progression géométrique. 
+
+```{r discr2}
+bks <- mf_get_breaks(
+  x = v, 
+  nbreaks = 6, 
+  breaks = "geom"
+) 
+cols <- mf_get_pal(
+  n = 6, 
+  palette = "SunsetDark",
+  rev = TRUE
+)
+par(mfrow = c(1,1), mar = c(5.1,0.1,2.1,0.1))
+x <- hist(
+  x = v, 
+  breaks = bks, 
+  col = cols, 
+  xlab = hlab, 
+  freq = F, 
+  axes = FALSE, 
+  ylab = "",
+  main = htitle, 
+  border = "grey80", 
+  lwd = 3, 
+  ylim = c(-0.01, 0.02), 
+  xlim = c(0,max(v))
+)
+stripchart(
+  x = v, 
+  pch = 21,
+  bg = "grey20", 
+  col = "white",
+  at = -0.005, 
+  jitter = 0.0025, 
+  add = TRUE,
+  method = "jitter", 
+  cex = .7,
+  xlab = ""
+)
+axis(side = 1, at = seq(0,round(max(v), 0),200))
+points(x = bks, y = rep(0, length(bks)), pch = "|")
+```
+
+#### Création de la carte
+
+```{r cartor}
+#| results: hide
+mf_export(zone, filename = paste0("map", dep, "hexa.png"), 
+          width = 700, expandBB = c(.05,0,0,0.2), 
+          theme = theme)
+mf_raster(osm_r, add = TRUE)
+mf_map(grid[grid$dens_pt>0,], var = "dens_pt", type = 'choro', 
+       breaks = bks, pal= cols, 
+       border = NA, 
+       leg_title = "Densité de départs\npar km2", 
+       leg_pos = "topright",
+       leg_val_rnd = 0, add = TRUE)
+mf_title(city)
+mf_credits(credits)
+mf_map(x = zone, col  = NA, lwd = 15, add = T)
+mf_scale(5)
+dev.off()
+```
+
+![](map31hexa.png){width="700px"}
+
+
+### Cartographie 4
+
+Sur une deuxième carte nous allons représenter la densité des points de départs en utilisant la méthode KDE. 
 
 #### Calcul du KDE
 Pour cela nous utilisons le package `spatstat` [@R-spatstat] :
 
 ```{r liss}
 #| results: hide
-library("spatstat", quietly = TRUE)
+library("spatstat")
 # transformation des points sf en points spatstat
 p <- as.ppp(st_coordinates(covdep_start), W = as.owin(zone))
 # calcul du KDE
@@ -603,7 +776,7 @@ mf_map(roads_n, 'n', 'prop', col = "#ffffff50",
        leg_title = "Nombre de\ncovoiturages\npar tronçon", 
        val_max = maxv, leg_pos = "right")
 mf_title(city)
-mf_credits(credits, bg = mf_theme()$bg)
+mf_credits(credits)
 mf_map(x = zone, col  = NA, lwd = 15, add = T)
 mf_scale(5)
 dev.off()
@@ -617,11 +790,16 @@ dev.off()
 
 ### Nantes 
 ![](map44.png){width="700px"}
+![](map44hexa_point.png){width="700px"}
+![](map44hexa.png){width="700px"}
 ![](map44dens.png){width="700px"}
 
-### Montellier
+### Montpellier
 ![](map34.png){width="700px"}
+![](map34hexa_point.png){width="700px"}
+![](map34hexa.png){width="700px"}
 ![](map34dens.png){width="700px"}
+
 :::
 
 
@@ -632,12 +810,6 @@ sessionInfo()
 ```
 
 
-
-```{r utils2}
-#| cache: false
-#| echo: false
-knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
-```
 
 
 

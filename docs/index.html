@@ -157,6 +157,8 @@ div.csl-indent {
   <li><a href="#comparaison-des-trajets-réels-et-théoriques" id="toc-comparaison-des-trajets-réels-et-théoriques" class="nav-link" data-scroll-target="#comparaison-des-trajets-réels-et-théoriques"><span class="toc-section-number">2.3.6</span>  Comparaison des trajets réels et théoriques</a></li>
   <li><a href="#cartographie-1" id="toc-cartographie-1" class="nav-link" data-scroll-target="#cartographie-1"><span class="toc-section-number">2.3.7</span>  Cartographie 1</a></li>
   <li><a href="#cartographie-2" id="toc-cartographie-2" class="nav-link" data-scroll-target="#cartographie-2"><span class="toc-section-number">2.3.8</span>  Cartographie 2</a></li>
+  <li><a href="#cartographie-3" id="toc-cartographie-3" class="nav-link" data-scroll-target="#cartographie-3"><span class="toc-section-number">2.3.9</span>  Cartographie 3</a></li>
+  <li><a href="#cartographie-4" id="toc-cartographie-4" class="nav-link" data-scroll-target="#cartographie-4"><span class="toc-section-number">2.3.10</span>  Cartographie 4</a></li>
   </ul></li>
   <li><a href="#autres-villes" id="toc-autres-villes" class="nav-link" data-scroll-target="#autres-villes"><span class="toc-section-number">2.4</span>  Autres villes</a></li>
   <li><a href="#pour-la-reproductibilité" id="toc-pour-la-reproductibilité" class="nav-link" data-scroll-target="#pour-la-reproductibilité"><span class="toc-section-number">2.5</span>  Pour la reproductibilité</a></li>
@@ -485,6 +487,9 @@ div.csl-indent {
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/plot_dv-1.png" class="img-fluid" width="672"></p>
 </div>
+</div>
+<div class="cell">
+
 </div>
 </section>
 </section>
@@ -826,7 +831,7 @@ Map tiles by Stamen Design CC BY 3.0 — Map data © OpenStreetMap contributors<
 </section>
 <section id="création-de-la-carte" class="level4" data-number="2.3.7.4">
 <h4 data-number="2.3.7.4" class="anchored" data-anchor-id="création-de-la-carte"><span class="header-section-number">2.3.7.4</span> Création de la carte</h4>
-<div class="cell" data-hash="index_cache/html/osmap_444b6bf7b7daeac80383004079892284">
+<div class="cell" data-hash="index_cache/html/osmap_fd537241e683065a56de7d1a46e22243">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valeur max</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>maxv <span class="ot">&lt;-</span> <span class="fu">max</span>(roads_n<span class="sc">$</span>n)</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Credits de la carte</span></span>
@@ -847,7 +852,7 @@ Map tiles by Stamen Design CC BY 3.0 — Map data © OpenStreetMap contributors<
 <span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_frame =</span> <span class="cn">TRUE</span>, </span>
 <span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>       )</span>
 <span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(city)</span>
-<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(credits, <span class="at">bg =</span> <span class="fu">mf_theme</span>()<span class="sc">$</span>bg)</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(credits)</span>
 <span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> zone, <span class="at">col  =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">15</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>(<span class="dv">5</span>)</span>
 <span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -857,12 +862,211 @@ Map tiles by Stamen Design CC BY 3.0 — Map data © OpenStreetMap contributors<
 </section>
 <section id="cartographie-2" class="level3" data-number="2.3.8">
 <h3 data-number="2.3.8" class="anchored" data-anchor-id="cartographie-2"><span class="header-section-number">2.3.8</span> Cartographie 2</h3>
-<p>Sur une deuxième carte nous allons représenté la densité des points de départs en utilisant la méthode KDE.</p>
-<section id="calcul-du-kde" class="level4" data-number="2.3.8.1">
-<h4 data-number="2.3.8.1" class="anchored" data-anchor-id="calcul-du-kde"><span class="header-section-number">2.3.8.1</span> Calcul du KDE</h4>
+<p>Sur cette carte nous allons représenter le nombre de départs en agrégeant les points de départs dans un maillage régulier.</p>
+<section id="création-dune-grille-régulière" class="level4" data-number="2.3.8.1">
+<h4 data-number="2.3.8.1" class="anchored" data-anchor-id="création-dune-grille-régulière"><span class="header-section-number">2.3.8.1</span> Création d’une grille régulière</h4>
+<div class="cell" data-hash="index_cache/html/gridcreate_11d4e4fee58255178114e0863516e66d">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># superficie d'une cellule (1km2)</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>cellsize <span class="ot">&lt;-</span> <span class="fl">1e6</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">st_make_grid</span>(<span class="at">x =</span> zone, </span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cellsize =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sqrt</span>(cellsize<span class="sc">/</span>((<span class="dv">3</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">3</span>)<span class="sc">/</span><span class="dv">2</span>))) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">3</span>)<span class="sc">/</span><span class="dv">2</span>, </span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">square =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="co"># transformation sfc vers sf + ajout id</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(grid), <span class="at">geometry =</span> grid)</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="co"># affichage du resultat</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(grid)</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(zone, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">border =</span> <span class="st">"red"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/gridcreate-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="découpage-de-la-grille-par-la-zone" class="level4" data-number="2.3.8.2">
+<h4 data-number="2.3.8.2" class="anchored" data-anchor-id="découpage-de-la-grille-par-la-zone"><span class="header-section-number">2.3.8.2</span> Découpage de la grille par la zone</h4>
+<div class="cell" data-hash="index_cache/html/gridcut_78f803fbb0e840070157c6956584a4f4">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(grid, zone)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: attribute variables are assumed to be spatially constant throughout all
+geometries</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># affichage du resultat</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(grid)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(zone, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">border =</span> <span class="st">"red"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/gridcut-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="compter-les-points-dans-la-grille" class="level4" data-number="2.3.8.3">
+<h4 data-number="2.3.8.3" class="anchored" data-anchor-id="compter-les-points-dans-la-grille"><span class="header-section-number">2.3.8.3</span> Compter les points dans la grille</h4>
+<div class="cell" data-hash="index_cache/html/cptpt_6a03c62c0d7c26aa31e975bd00ffe2b3">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># liste des intersections</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>(inter_g_pt <span class="ot">&lt;-</span> <span class="fu">st_intersects</span>(grid, covdep_start))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sparse geometry binary predicate list of length 2938, where the
+predicate was `intersects'
+first 10 elements:
+ 1: (empty)
+ 2: (empty)
+ 3: (empty)
+ 4: (empty)
+ 5: (empty)
+ 6: (empty)
+ 7: (empty)
+ 8: (empty)
+ 9: (empty)
+ 10: (empty)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># parcourir la liste et compter le nombre d'intersections</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>n_pt <span class="ot">&lt;-</span> <span class="fu">sapply</span>(inter_g_pt, length)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="création-de-la-carte-1" class="level4" data-number="2.3.8.4">
+<h4 data-number="2.3.8.4" class="anchored" data-anchor-id="création-de-la-carte-1"><span class="header-section-number">2.3.8.4</span> Création de la carte</h4>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-2_f7cbc336afc02e96c529fa88d15ff74c">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_export</span>(zone, <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="st">"map"</span>, dep, <span class="st">"hexa_point.png"</span>), </span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">700</span>, <span class="at">expandBB =</span> <span class="fu">c</span>(.<span class="dv">05</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">theme =</span> theme)</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_raster</span>(osm_r, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(grid, </span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">var =</span> <span class="st">"n_pt"</span>, <span class="at">type =</span> <span class="st">'prop'</span>,</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_pos =</span> <span class="st">"topright"</span>,</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Nombre de départs"</span>,</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">inches =</span> .<span class="dv">175</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>2172 '0' values are not plotted on the map.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(city)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(credits)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> zone, <span class="at">col  =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">15</span>, <span class="at">add =</span> T)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>(<span class="dv">5</span>)</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="map31hexa_point.png" class="img-fluid" width="700"></p>
+</section>
+</section>
+<section id="cartographie-3" class="level3" data-number="2.3.9">
+<h3 data-number="2.3.9" class="anchored" data-anchor-id="cartographie-3"><span class="header-section-number">2.3.9</span> Cartographie 3</h3>
+<p>Représentons maintenant la densité de points par cellulle de notre maillage régulier. Pour cela nous devons créer une variable de densité de points par km2 et la discrétiser.</p>
+<section id="discrétisation" class="level4" data-number="2.3.9.1">
+<h4 data-number="2.3.9.1" class="anchored" data-anchor-id="discrétisation"><span class="header-section-number">2.3.9.1</span> Discrétisation</h4>
+<div class="cell" data-hash="index_cache/html/discr1_bbf7bbbf1ea48e23a48b80cb7dabaf44">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># densité de points</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>dens_pt <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(grid<span class="sc">$</span>n_pt <span class="sc">/</span> <span class="fu">set_units</span>(<span class="fu">st_area</span>(grid), <span class="st">"km2"</span>))</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># discretisation</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(grid<span class="sc">$</span>dens_pt)</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(v)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/discr1-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ne gardons que les cellule &gt;0</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> v[v<span class="sc">&gt;</span><span class="dv">0</span>]</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>htitle <span class="ot">&lt;-</span> <span class="st">"Distribution de la densité de départs"</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>hlab <span class="ot">&lt;-</span> <span class="st">"Départs par km2"</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">5.1</span>,<span class="fl">2.1</span>,<span class="fl">2.1</span>,<span class="fl">2.1</span>), <span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>))</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> v, </span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">50</span>,</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> htitle, </span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> hlab,</span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">freq =</span> <span class="cn">FALSE</span></span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(v, <span class="at">horizontal =</span> T)</span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a><span class="fu">stripchart</span>(</span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> v,</span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"jitter"</span>, </span>
+<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">"red"</span>, </span>
+<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"white"</span>,</span>
+<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> .<span class="dv">9</span></span>
+<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/discr1-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>La distribution de la variable est très dissymétrique à gauche. Utilisons une discrétisation basée sur une progression géométrique.</p>
+<div class="cell" data-hash="index_cache/html/discr2_ccc3c1e5fbb87c2ba78361a20bfce58e">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>bks <span class="ot">&lt;-</span> <span class="fu">mf_get_breaks</span>(</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> v, </span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">nbreaks =</span> <span class="dv">6</span>, </span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="st">"geom"</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">mf_get_pal</span>(</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">6</span>, </span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"SunsetDark"</span>,</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">rev =</span> <span class="cn">TRUE</span></span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">5.1</span>,<span class="fl">0.1</span>,<span class="fl">2.1</span>,<span class="fl">0.1</span>))</span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">hist</span>(</span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> v, </span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> bks, </span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> cols, </span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> hlab, </span>
+<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">freq =</span> F, </span>
+<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">axes =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">""</span>,</span>
+<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> htitle, </span>
+<span id="cb58-21"><a href="#cb58-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">border =</span> <span class="st">"grey80"</span>, </span>
+<span id="cb58-22"><a href="#cb58-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">3</span>, </span>
+<span id="cb58-23"><a href="#cb58-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.01</span>, <span class="fl">0.02</span>), </span>
+<span id="cb58-24"><a href="#cb58-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(v))</span>
+<span id="cb58-25"><a href="#cb58-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb58-26"><a href="#cb58-26" aria-hidden="true" tabindex="-1"></a><span class="fu">stripchart</span>(</span>
+<span id="cb58-27"><a href="#cb58-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> v, </span>
+<span id="cb58-28"><a href="#cb58-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb58-29"><a href="#cb58-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">"grey20"</span>, </span>
+<span id="cb58-30"><a href="#cb58-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"white"</span>,</span>
+<span id="cb58-31"><a href="#cb58-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">at =</span> <span class="sc">-</span><span class="fl">0.005</span>, </span>
+<span id="cb58-32"><a href="#cb58-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">jitter =</span> <span class="fl">0.0025</span>, </span>
+<span id="cb58-33"><a href="#cb58-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb58-34"><a href="#cb58-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"jitter"</span>, </span>
+<span id="cb58-35"><a href="#cb58-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> .<span class="dv">7</span>,</span>
+<span id="cb58-36"><a href="#cb58-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">""</span></span>
+<span id="cb58-37"><a href="#cb58-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb58-38"><a href="#cb58-38" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="at">side =</span> <span class="dv">1</span>, <span class="at">at =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="fu">round</span>(<span class="fu">max</span>(v), <span class="dv">0</span>),<span class="dv">200</span>))</span>
+<span id="cb58-39"><a href="#cb58-39" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> bks, <span class="at">y =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(bks)), <span class="at">pch =</span> <span class="st">"|"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/discr2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="création-de-la-carte-2" class="level4" data-number="2.3.9.2">
+<h4 data-number="2.3.9.2" class="anchored" data-anchor-id="création-de-la-carte-2"><span class="header-section-number">2.3.9.2</span> Création de la carte</h4>
+<div class="cell" data-hash="index_cache/html/cartor_44c65e262b9bfe53f3691bbb659e4abc">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_export</span>(zone, <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="st">"map"</span>, dep, <span class="st">"hexa.png"</span>), </span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">700</span>, <span class="at">expandBB =</span> <span class="fu">c</span>(.<span class="dv">05</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), </span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">theme =</span> theme)</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_raster</span>(osm_r, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(grid[grid<span class="sc">$</span>dens_pt<span class="sc">&gt;</span><span class="dv">0</span>,], <span class="at">var =</span> <span class="st">"dens_pt"</span>, <span class="at">type =</span> <span class="st">'choro'</span>, </span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks =</span> bks, <span class="at">pal=</span> cols, </span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">border =</span> <span class="cn">NA</span>, </span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Densité de départs</span><span class="sc">\n</span><span class="st">par km2"</span>, </span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_pos =</span> <span class="st">"topright"</span>,</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_val_rnd =</span> <span class="dv">0</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(city)</span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(credits)</span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> zone, <span class="at">col  =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">15</span>, <span class="at">add =</span> T)</span>
+<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>(<span class="dv">5</span>)</span>
+<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="map31hexa.png" class="img-fluid" width="700"></p>
+</section>
+</section>
+<section id="cartographie-4" class="level3" data-number="2.3.10">
+<h3 data-number="2.3.10" class="anchored" data-anchor-id="cartographie-4"><span class="header-section-number">2.3.10</span> Cartographie 4</h3>
+<p>Sur une deuxième carte nous allons représenter la densité des points de départs en utilisant la méthode KDE.</p>
+<section id="calcul-du-kde" class="level4" data-number="2.3.10.1">
+<h4 data-number="2.3.10.1" class="anchored" data-anchor-id="calcul-du-kde"><span class="header-section-number">2.3.10.1</span> Calcul du KDE</h4>
 <p>Pour cela nous utilisons le package <code>spatstat</code> <span class="citation" data-cites="R-spatstat">(<a href="#ref-R-spatstat" role="doc-biblioref">Baddeley et Turner, 2005</a>)</span> :</p>
-<div class="cell" data-hash="index_cache/html/liss_89616607b941af775558f0b03c7ffee7">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"spatstat"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="index_cache/html/liss_06f370e63022aded23dc9827efb0ce74">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"spatstat"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: spatstat.data</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: spatstat.geom</code></pre>
+</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>spatstat.geom 3.0-3</code></pre>
 </div>
@@ -876,13 +1080,31 @@ Attaching package: 'spatstat.geom'</code></pre>
     area, delaunay, rescale, rotate, shift, where.max, where.min</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: spatstat.random</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
 <pre><code>spatstat.random 3.0-1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: spatstat.explore</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: nlme</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>spatstat.explore 3.0-5</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: spatstat.model</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: rpart</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
 <pre><code>spatstat.model 3.0-2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: spatstat.linnet</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>spatstat.linnet 3.0-3</code></pre>
@@ -892,61 +1114,61 @@ Attaching package: 'spatstat.geom'</code></pre>
 spatstat 3.0-2 
 For an introduction to spatstat, type 'beginner' </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transformation des points sf en points spatstat</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(<span class="fu">st_coordinates</span>(covdep_start), <span class="at">W =</span> <span class="fu">as.owin</span>(zone))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transformation des points sf en points spatstat</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">as.ppp</span>(<span class="fu">st_coordinates</span>(covdep_start), <span class="at">W =</span> <span class="fu">as.owin</span>(zone))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 1751 points were rejected as lying outside the specified window</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: data contain duplicated points</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calcul du KDE</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">density.ppp</span>(p, <span class="at">sigma =</span> <span class="dv">1000</span>, <span class="at">eps =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">100</span>), <span class="at">positive =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>rasdens <span class="ot">&lt;-</span> <span class="fu">rast</span>(ds) <span class="sc">*</span> <span class="dv">1000</span> <span class="sc">*</span> <span class="dv">1000</span></span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(rasdens) <span class="ot">&lt;-</span> <span class="st">'EPSG:3857'</span></span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rasdens)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calcul du KDE</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">density.ppp</span>(p, <span class="at">sigma =</span> <span class="dv">1000</span>, <span class="at">eps =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">100</span>), <span class="at">positive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>rasdens <span class="ot">&lt;-</span> <span class="fu">rast</span>(ds) <span class="sc">*</span> <span class="dv">1000</span> <span class="sc">*</span> <span class="dv">1000</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(rasdens) <span class="ot">&lt;-</span> <span class="st">'EPSG:3857'</span></span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rasdens)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/liss-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="cartographie" class="level4" data-number="2.3.8.2">
-<h4 data-number="2.3.8.2" class="anchored" data-anchor-id="cartographie"><span class="header-section-number">2.3.8.2</span> Cartographie</h4>
+<section id="cartographie" class="level4" data-number="2.3.10.2">
+<h4 data-number="2.3.10.2" class="anchored" data-anchor-id="cartographie"><span class="header-section-number">2.3.10.2</span> Cartographie</h4>
 <p>Nous utlisons le package <code>tanaka</code> <span class="citation" data-cites="R-tanaka">(<a href="#ref-R-tanaka" role="doc-biblioref">Giraud, 2022d</a>)</span> pour représenter le KDE avec un effet pseudo 3D :</p>
-<div class="cell" data-hash="index_cache/html/liss2_e54d6e1a98405856f0c2f9edc4375f6d">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calcul des bornes des classes</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">values</span>(rasdens)</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>bks <span class="ot">&lt;-</span> <span class="fu">mf_get_breaks</span>(v[v<span class="sc">&gt;</span><span class="dv">5</span>], <span class="at">nbreaks =</span> <span class="dv">8</span>, <span class="at">breaks =</span> <span class="st">"geom"</span>)</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>bks <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(<span class="dv">0</span>,bks))</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># création d'une palette de couleurs</span></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">hcl.colors</span>(<span class="at">n =</span> <span class="fu">length</span>(bks)<span class="sc">-</span><span class="dv">1</span>, <span class="st">"Inferno"</span>, <span class="at">rev=</span>F)</span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># crédits</span></span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>credits <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"T. Giraud, 2023</span><span class="sc">\n</span><span class="st">"</span>, </span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Registre de Preuve de Covoiturage (DGITM)</span><span class="sc">\n</span><span class="st">"</span>, </span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Au départ du département, pour moins de 100 km et "</span>,</span>
-<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"moins d'1H30, "</span>,</span>
-<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"de septembre à novembre 2022"</span>)</span>
-<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tanaka)</span>
-<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_export</span>(zone, <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="st">"map"</span>, dep, <span class="st">"dens.png"</span>), </span>
-<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">700</span>, <span class="at">expandBB =</span> <span class="fu">c</span>(.<span class="dv">05</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), </span>
-<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">theme =</span> theme)</span>
-<span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a><span class="fu">tanaka</span>(rasdens, <span class="at">breaks =</span> bks, <span class="at">col =</span> cols, </span>
-<span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend.pos =</span> <span class="st">"n"</span>, <span class="at">mask =</span> zone, </span>
-<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb59-20"><a href="#cb59-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_legend</span>(<span class="at">type =</span> <span class="st">"choro"</span>, <span class="at">pos =</span> <span class="st">"topright"</span>,</span>
-<span id="cb59-21"><a href="#cb59-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">val =</span> bks,<span class="at">pal =</span> cols, </span>
-<span id="cb59-22"><a href="#cb59-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Densité de départs</span><span class="sc">\n</span><span class="st">"</span>, </span>
-<span id="cb59-23"><a href="#cb59-23" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"KDE, sigma=1km</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb59-24"><a href="#cb59-24" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"(départs par km2)"</span>),</span>
-<span id="cb59-25"><a href="#cb59-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">val_rnd =</span> <span class="dv">0</span>)</span>
-<span id="cb59-26"><a href="#cb59-26" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(roads_n, <span class="st">'n'</span>, <span class="st">'prop'</span>, <span class="at">col =</span> <span class="st">"#ffffff50"</span>,</span>
-<span id="cb59-27"><a href="#cb59-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Nombre de</span><span class="sc">\n</span><span class="st">covoiturages</span><span class="sc">\n</span><span class="st">par tronçon"</span>, </span>
-<span id="cb59-28"><a href="#cb59-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">val_max =</span> maxv, <span class="at">leg_pos =</span> <span class="st">"right"</span>)</span>
-<span id="cb59-29"><a href="#cb59-29" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(city)</span>
-<span id="cb59-30"><a href="#cb59-30" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(credits, <span class="at">bg =</span> <span class="fu">mf_theme</span>()<span class="sc">$</span>bg)</span>
-<span id="cb59-31"><a href="#cb59-31" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> zone, <span class="at">col  =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">15</span>, <span class="at">add =</span> T)</span>
-<span id="cb59-32"><a href="#cb59-32" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>(<span class="dv">5</span>)</span>
-<span id="cb59-33"><a href="#cb59-33" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="index_cache/html/liss2_512fdda5c86e2f739dcf24fec3e3f7f4">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calcul des bornes des classes</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">values</span>(rasdens)</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>bks <span class="ot">&lt;-</span> <span class="fu">mf_get_breaks</span>(v[v<span class="sc">&gt;</span><span class="dv">5</span>], <span class="at">nbreaks =</span> <span class="dv">8</span>, <span class="at">breaks =</span> <span class="st">"geom"</span>)</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>bks <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(<span class="dv">0</span>,bks))</span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="co"># création d'une palette de couleurs</span></span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">hcl.colors</span>(<span class="at">n =</span> <span class="fu">length</span>(bks)<span class="sc">-</span><span class="dv">1</span>, <span class="st">"Inferno"</span>, <span class="at">rev=</span>F)</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a><span class="co"># crédits</span></span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>credits <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"T. Giraud, 2023</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Registre de Preuve de Covoiturage (DGITM)</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Au départ du département, pour moins de 100 km et "</span>,</span>
+<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"moins d'1H30, "</span>,</span>
+<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"de septembre à novembre 2022"</span>)</span>
+<span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tanaka)</span>
+<span id="cb81-14"><a href="#cb81-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_export</span>(zone, <span class="at">filename =</span> <span class="fu">paste0</span>(<span class="st">"map"</span>, dep, <span class="st">"dens.png"</span>), </span>
+<span id="cb81-15"><a href="#cb81-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">700</span>, <span class="at">expandBB =</span> <span class="fu">c</span>(.<span class="dv">05</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.2</span>), </span>
+<span id="cb81-16"><a href="#cb81-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">theme =</span> theme)</span>
+<span id="cb81-17"><a href="#cb81-17" aria-hidden="true" tabindex="-1"></a><span class="fu">tanaka</span>(rasdens, <span class="at">breaks =</span> bks, <span class="at">col =</span> cols, </span>
+<span id="cb81-18"><a href="#cb81-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend.pos =</span> <span class="st">"n"</span>, <span class="at">mask =</span> zone, </span>
+<span id="cb81-19"><a href="#cb81-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb81-20"><a href="#cb81-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_legend</span>(<span class="at">type =</span> <span class="st">"choro"</span>, <span class="at">pos =</span> <span class="st">"topright"</span>,</span>
+<span id="cb81-21"><a href="#cb81-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">val =</span> bks,<span class="at">pal =</span> cols, </span>
+<span id="cb81-22"><a href="#cb81-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Densité de départs</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb81-23"><a href="#cb81-23" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"KDE, sigma=1km</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb81-24"><a href="#cb81-24" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"(départs par km2)"</span>),</span>
+<span id="cb81-25"><a href="#cb81-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">val_rnd =</span> <span class="dv">0</span>)</span>
+<span id="cb81-26"><a href="#cb81-26" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(roads_n, <span class="st">'n'</span>, <span class="st">'prop'</span>, <span class="at">col =</span> <span class="st">"#ffffff50"</span>,</span>
+<span id="cb81-27"><a href="#cb81-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Nombre de</span><span class="sc">\n</span><span class="st">covoiturages</span><span class="sc">\n</span><span class="st">par tronçon"</span>, </span>
+<span id="cb81-28"><a href="#cb81-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">val_max =</span> maxv, <span class="at">leg_pos =</span> <span class="st">"right"</span>)</span>
+<span id="cb81-29"><a href="#cb81-29" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(city)</span>
+<span id="cb81-30"><a href="#cb81-30" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(credits)</span>
+<span id="cb81-31"><a href="#cb81-31" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> zone, <span class="at">col  =</span> <span class="cn">NA</span>, <span class="at">lwd =</span> <span class="dv">15</span>, <span class="at">add =</span> T)</span>
+<span id="cb81-32"><a href="#cb81-32" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>(<span class="dv">5</span>)</span>
+<span id="cb81-33"><a href="#cb81-33" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="map31dens.png" class="img-fluid" width="700"></p>
 </section>
@@ -955,21 +1177,21 @@ For an introduction to spatstat, type 'beginner' </code></pre>
 <section id="autres-villes" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="autres-villes"><span class="header-section-number">2.4</span> Autres villes</h2>
 <div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Nantes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Montellier</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Nantes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Montpellier</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p><img src="map44.png" class="img-fluid" width="700"> <img src="map44dens.png" class="img-fluid" width="700"></p>
+<p><img src="map44.png" class="img-fluid" width="700"> <img src="map44hexa_point.png" class="img-fluid" width="700"> <img src="map44hexa.png" class="img-fluid" width="700"> <img src="map44dens.png" class="img-fluid" width="700"></p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p><img src="map34.png" class="img-fluid" width="700"> <img src="map34dens.png" class="img-fluid" width="700"></p>
+<p><img src="map34.png" class="img-fluid" width="700"> <img src="map34hexa_point.png" class="img-fluid" width="700"> <img src="map34hexa.png" class="img-fluid" width="700"> <img src="map34dens.png" class="img-fluid" width="700"></p>
 </div>
 </div>
 </div>
 </section>
 <section id="pour-la-reproductibilité" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="pour-la-reproductibilité"><span class="header-section-number">2.5</span> Pour la reproductibilité</h2>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-2_234fdc0c9a71c10752d7ab88868f454c">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-3_565ee9cd3e4c1ec0d4a2d5d239115cb8">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.2.2 (2022-10-31)
 Platform: x86_64-pc-linux-gnu (64-bit)
@@ -1018,9 +1240,6 @@ loaded via a namespace (and not attached):
 [52] slippymath_0.3.1      yaml_2.3.6            spatstat.sparse_3.0-0
 [55] isoband_0.2.7         classInt_0.4-8        knitr_1.41           </code></pre>
 </div>
-</div>
-<div class="cell">
-
 </div>
 
 </section>
