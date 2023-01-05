@@ -41,7 +41,7 @@ execute:
 
 # Exemple d'analyse
 
-Nous voulons étudier les déplacements effectué en covoiturage. 
+Nous voulons étudier les déplacements effectués en covoiturage. 
 Nous nous concentrerons sur les durées, distances et vitesses de ces déplacements. 
 
 
@@ -55,10 +55,13 @@ Nous téléchargeons les données pour les mois de septembre, octobre et novembr
 
 ```{r download}
 #| eval: false
+# creation d'un dossier
 dir.create("data-raw")
+# URLs des fichiers
 cov_2022_11 <- "https://www.data.gouv.fr/fr/datasets/r/5d469743-9636-4e84-841c-2ae1111b4009"
 cov_2022_10 <- "https://www.data.gouv.fr/fr/datasets/r/80b38046-8166-49fd-bbee-fc0ba9612a88"
 cov_2022_09 <- "https://www.data.gouv.fr/fr/datasets/r/513862ee-8e8e-426b-9b67-7a4e39ab253a"
+# téléchargement des fichiers
 download.file(cov_2022_11, destfile = "data-raw/cov_2022_11.csv")
 download.file(cov_2022_10, destfile = "data-raw/cov_2022_10.csv")
 download.file(cov_2022_09, destfile = "data-raw/cov_2022_09.csv")
@@ -70,10 +73,11 @@ Une fois les données téléchargées nous pouvons les importer dans R.
 
 ```{r import}
 #| eval: false
+# import des fichiers dans R
 cov_raw_1 <- read.csv(file = "data-raw/cov_2022_09.csv", sep = ";")
 cov_raw_2 <- read.csv(file = "data-raw/cov_2022_10.csv", sep = ";")
 cov_raw_3 <- read.csv(file = "data-raw/cov_2022_11.csv", sep = ";")
-
+# rassemblement des 3 tables
 cov_raw <- rbind(cov_raw_1, cov_raw_2, cov_raw_3)
 ```
 
@@ -116,7 +120,7 @@ Les valeurs minimums de ces variables sont à 0, ce n'est pas très réaliste.
 
 ### Nettoyage
 
-Suppression des trajets inférieurs à 2 minutes ou inférieurs à 1 kilomètres.
+Suppression des trajets dont la durée est inférieure à 2 minutes ou la distance inférieure à 1 kilomètre.
 
 ```{r clean}
 cov <- cov_raw[cov_raw$journey_distance >= 1000 & 
@@ -130,16 +134,20 @@ cov <- cov_raw[cov_raw$journey_distance >= 1000 &
 
 ### Calcul des indicateurs, gestion des unités de mesure
 
-Le package `units` [@R-units] permet de convertir facilement les unités de mesure. 
+Le package `units` [@R-units] permet de définir et convertir facilement les unités de mesure. 
 
 ```{r indicators}
+# extraction des variable dans des vecteurs distincts
 duree <- cov$journey_duration
 distance <- cov$journey_distance
 library(units)
+# définition des unités de mesure initiales
 units(distance) <- "m"
 units(duree) <- "min"
+# transformation des unités de mesure
 distance <- set_units(distance, "km")
 duree <- set_units(duree, "h")
+# creation d'un vecteur des distances
 vitesse <- distance / duree
 ```
 
@@ -204,29 +212,42 @@ knitr::opts_chunk$set(cache = TRUE)
 Nous sélectionnons les trajets depuis la Haute-Garonne (31) de moins de 100 km et de moins d'1h30.
 
 ```{r selecta31}
+# choix du département
 dep <- 31
+# selection
 covdep <- cov[cov$journey_start_department %in% dep & 
                 cov$journey_distance <= 100000 &
                 cov$journey_duration <= 150, ]
+# dimension de l'extraction
+dim(covdep)
 ```
 
-> Notez qu'il suffit de modifier `dep <- 31` pour obtenir l'analyse sur un autre département. 
+
+::: {.callout-note}
+Il suffit de modifier `dep <- 31` pour obtenir l'analyse sur un autre département. 
+:::
+
 
 
 ### Calcul des indicateurs, gestion des unités de mesure
 
 ```{r indicators31}
+# extraction des variable dans des vecteurs
 duree <- covdep$journey_duration
 distance <- covdep$journey_distance
 library(units)
+# définition des unités de mesure initiales
 units(distance) <- "m"
 units(duree) <- "min"
+# transformation d'unité de mesure
 distance <- set_units(distance, "km")
+# calcul des vitesses
 vitesse <- distance / duree
+# transformation de l'unité de mesure des vitesses
 vitesse <- set_units(vitesse, "km/h")
 ```
 
-### Représentations
+### Représentations et statistiques
 
 ```{r table31}
 summary_table <- data.frame(
@@ -265,11 +286,13 @@ plot(x = distance, y = vitesse,
 
 ### Récupération de trajets théoriques
 
-Nous utilisons le package `osrm` [@R-osrm] pour récupérer les trajets par le plus court chemin entre les points de départs et d'arrivées. Ces trajets sont calculés par le logiciel OSRM (Open Source Routing Machine) [@luxen-vetter-2011] qui se base sur les données d'OpenStreetMap. Le package `osrm` sert d'interface entre R et OSRM.  
+Dans la partie suivante nous voulons obtenir une approximation des trajets effectués par les usagers du covoiturage. Pour cela nous utiliserons les trajets par le plus court chemin entre les départs et les arrivées des covoiturages en utilisant le réseau routier fourni par la base de données OpenStreetMap.   
+
+Nous utilisons le package `osrm` [@R-osrm] pour récupérer ces trajets théoriques. Ces trajets sont calculés par le logiciel OSRM (Open Source Routing Machine) [@luxen-vetter-2011] qui se base sur les données d'OpenStreetMap. Le package `osrm` sert d'interface entre R et OSRM.  
 
 
 
-La fonction ci-dessous est utile pour demander une grande quantité de routes en utilisant les fonctionnalités de parallélisation de R. Pour l'utiliser il est nécessaire d'avoir accès à un serveur OSRM. 
+La fonction ci-dessous est utile pour demander une très grande quantité de routes en utilisant les fonctionnalités de parallélisation de R. Pour l'utiliser il est nécessaire d'avoir accès à un serveur OSRM. 
 
 ```{r nadapar}
 #| eval: false
@@ -356,12 +379,6 @@ st_write(obj = roads,
 
 
 
-
-
-
-
-
-
 ### (Import des trajets pré-enregistrés)
 
 ```{r importroadspourdefaux}
@@ -375,13 +392,15 @@ roads <- st_read(dsn = "data/road.gpkg", layer = paste0("road_",dep))
 ### Comparaison des trajets réels et théoriques
 
 
-Nous pouvons maintenant comparer les distances et les durées réeeles et théoriques. 
+Nous pouvons maintenant comparer les distances et les durées réelles et théoriques. 
 
 ```{r graphroadsosrm}
-#| fig-width: 5
-#| fig-height: 5
+#| fig-width: 7
+#| fig-height: 7
+# définition de l'unité de mesure
 units(roads$duration) <- "min" 
 units(roads$distance) <- "km" 
+# arrondi des durées
 duree_osrm <- round(roads$duration,2)
 distance_osrm <- roads$distance
 plot(duree, duree_osrm, asp = 1, 
@@ -405,23 +424,24 @@ abline(a = 0, b = 1)
 
 ### Cartographie 1
 
-Sur une première carte nous montrerons les tronçons de routes empruntés par les usagers du covoiturage dans la zone où a lieu le plus grand nombre de départs dans le département. 
+Sur une première carte nous montrerons les tronçons de routes empruntés par les usagers du covoiturage dans la zone où a lieu le plus grand nombre de départs dans le département. L'epaisseur de chaque tronçons doit être proportionelle aux nombre de voitures l'empruntant. 
 
 #### Trouver la zone ou a lieu le plus grand nombre de départs
 
 Création d'une couche de points des lieux de départs : 
 ```{r tlse}
 covdep_start <- st_as_sf(covdep, 
-                         coords  = c('journey_start_lon', 'journey_start_lat'), 
+                         coords  = c('journey_start_lon', 
+                                     'journey_start_lat'), 
                          crs = "EPSG:4326", remove = FALSE)
 # reprojection en webmercator
 covdep_start <- st_transform(covdep_start, "EPSG:3857")
 ```
 
-*Towngroup* où ont lieux le plus de départs : 
+EPCI ou AOM (*towngroup*) où ont lieux le plus de départs : 
 ```{r tlse1}
-# Aggrégation des départ par towngroup 
-# et sélection du towngroup ayant le plus de départs
+# Aggrégation des départ par EPCI ou AOM 
+# et sélection de l'EPCI ou AOM ayant le plus de départs
 city <- tapply(X = covdep$trip_id, 
                INDEX = covdep$journey_start_towngroup, 
                FUN = length) |>
@@ -435,17 +455,24 @@ city
 Création d'une zone de 30 km autour du centroide des départs de la zone : 
 
 ```{r tlse2}
-zone <- covdep_start |>
-  subset(journey_start_towngroup %in% city) |>
-  st_geometry() |>
-  st_union() |>
-  st_centroid() |>
-  st_buffer(30000) |>
-  st_sf()
+zone <- covdep_start |>                          # à partir des points de départs
+  subset(journey_start_towngroup %in% city) |>   # sélection des points de l'EPCI
+  st_geometry() |>                               # extraction de leurs géométrie
+  st_union() |>                                  # transformation en multipoint
+  st_centroid() |>                               # extraction du centroide    
+  st_buffer(30000) |>                            # buffer autour du centroid
+  st_sf()                                        # transformation en objet sf
+```
+
+Affichage de la zone :
+
+```{r}
+plot(zone)
 ```
 
 
 #### Télécharger des tuiles raster pour le fond de carte
+
 Téléchargement de tuiles raster (Terrain Background de chez Stamen) sur la zone. Nous utilisons le package `maptiles` [@R-maptiles] pour cela :
 
 ```{r osmT}
@@ -454,7 +481,7 @@ library(maptiles)
 osm <- get_tiles(zone, 
                  provider = "Stamen.TerrainBackground", 
                  zoom = 11, 
-                 cachedir = "tiles", verbose = TRUE)
+                 cachedir = "tiles")
 plot_tiles(osm)
 ```
 
@@ -470,7 +497,24 @@ osm_r <- osm |>
 
 Nous pouvons ensuite visualiser les tuiles et la zone grace au package `mapsf` [@R-mapsf].
 
+```{r}
+#| eval: true
+#| echo: false
+library(mapsf)
+theme <- mf_theme("green",
+                  mar = c(0,0,2,0), 
+                  line = 2, 
+                  cex = 1.8, 
+                  inner = FALSE, 
+                  pos = "left")
+ratio <- mf_get_ratio(zone, 6, theme = theme)
+```
+
+
+
 ```{r osmT3}
+#| fig-width: !expr ratio[1]
+#| fig-height: !expr ratio[2]
 library(mapsf)
 # définition d'un thème
 theme <- mf_theme("green",
@@ -479,33 +523,59 @@ theme <- mf_theme("green",
                   cex = 1.8, 
                   inner = FALSE, 
                   pos = "left")
+# initialisation de la carte sur l'objet "zone"
 mf_init(zone)
+# affichage des tuiles
 mf_raster(osm_r, add = TRUE)
+# affichage de la zone
 mf_map(zone, col = NA, lwd = 15, add = TRUE)
+# titre
+mf_title(city)
 ```
 
 
 
 #### Agrégation des tronçons
 
-Nous devons maintenant agréger les tronçons de route se superposant et compter le nombre de superposition par tronçons. Pour cela nous utilisons le package `stplanr` [@R-stplanr]. Cette opéaration est assez lourde, nous enregristrons son résultat pour une utilisation ultérieure : 
+Pour l'instant chaque trajet est individualisé. Si plusieurs trajets empruntent le même tronçon ils se superposent. Ces superpositions sont visibles dans la carte suivante utilisant la transparence.  
+
+```{r prep}
+# Préparation des routes
+
+# reprojection en webmercator
+roads <- st_transform(roads, "EPSG:3857")
+# découpage des route à la limite de la zone
+roads <- st_intersection(roads, st_geometry(zone))
+# keep only linestrings
+roads <- st_collection_extract(roads, "LINESTRING")
+```
 
 
 
+```{r alpha}
+#| fig-width: !expr ratio[1]
+#| fig-height: !expr ratio[2]
+mf_init(zone, theme = theme)
+mf_raster(osm_r, add = TRUE)
+# affichage des routes avec de la transparence  
+mf_map(roads, lwd = 2, col = "#94000005", add = TRUE)
+mf_map(zone, col = NA, lwd = 15, add = TRUE)
+mf_title(city)
+```
+
+
+
+Nous devons maintenant agréger les tronçons de route se superposant et compter le nombre de superpositions par tronçons. Pour cela nous utilisons le package `stplanr` [@R-stplanr]. Cette opération est assez lourde, nous enregistrons son résultat pour une utilisation ultérieure : 
 
 
 ```{r}
 #| eval: false
-# reprojection en webmercator
-roads <- st_transform(roads, "EPSG:3857")
-# découage des route à la limite de la zone
-roads <- st_intersection(roads, st_geometry(zone))
-# keep only linestrings
-roads <- st_collection_extract(roads, "LINESTRING")
 # Agrégation des tronçons
 library(stplanr)
+# variable de poids (1 pour chaque trajets)
 roads$n <- 1
-roads_n <- overline(sl = roads, attrib = "n", ncores = 8)
+# agrégation des trajets par tronçons
+roads_n <- overline(sl = roads, attrib = "n", ncores = 7)
 # Sauvegarder le résultat
 st_write(obj = roads_n, 
          dsn = "data/road.gpkg", 
@@ -537,20 +607,29 @@ credits <- paste0("T. Giraud, 2023\n",
                   "Au départ du département, pour moins de 100 km et ",
                   "moins d'1H30, ",
                   "de septembre à novembre 2022")
+# Début de l'export, définition de ses dimentions
 mf_export(zone, filename = paste0("map", dep, ".png"), 
           width = 700, expandBB = c(.05,0,0,0.2), 
           theme = theme)
-mf_raster(osm_r, add = T)
+# Affichage des tuiles
+mf_raster(osm_r, add = TRUE)
+# Affichage des routes epaisseurs proportionnelles
+# aux nombre de superpositions
 mf_map(x = roads_n, var = 'n', type = 'prop', 
        val_max = maxv, col = "darkgreen",
        leg_pos = "topright", 
        leg_title = "Nombre de\ncovoiturages\npar tronçon", 
        leg_frame = TRUE, 
        )
+# titre
 mf_title(city)
+# credits
 mf_credits(credits)
+# zone
 mf_map(x = zone, col  = NA, lwd = 15, add = TRUE)
+# echelle
 mf_scale(5)
+# Fin de l'export
 dev.off()
 ```
 
@@ -559,15 +638,21 @@ dev.off()
 
 
 ### Cartographie 2
+
 Sur cette carte nous allons représenter le nombre de départs en agrégeant les points de départs dans un maillage régulier.
 
 #### Création d'une grille régulière
 
 ```{r gridcreate}
+#| fig-width: !expr ratio[1]
+#| fig-height: !expr ratio[2]
 # superficie d'une cellule (1km2)
-cellsize <- 1e6
+size <- 1e6
+# transformation de la surface en "rayon" d'un hexagone
+cellsize <- 2 * sqrt(size/((3*sqrt(3)/2))) * sqrt(3)/2
+# création d'une grille d'hexagones
 grid <- st_make_grid(x = zone, 
-                     cellsize = 2 * sqrt(cellsize/((3*sqrt(3)/2))) * sqrt(3)/2, 
+                     cellsize = cellsize, 
                      square = FALSE) 
 # transformation sfc vers sf + ajout id
 grid <- st_sf(id = 1:length(grid), geometry = grid)
@@ -579,6 +664,8 @@ mf_map(zone, add = TRUE, col = NA, lwd = 2, border = "red")
 #### Découpage de la grille par la zone
 
 ```{r gridcut}
+#| fig-width: !expr ratio[1]
+#| fig-height: !expr ratio[2]
 grid <- st_intersection(grid, zone)
 # affichage du resultat
 mf_map(grid)
@@ -588,7 +675,10 @@ mf_map(zone, add = TRUE, col = NA, lwd = 2, border = "red")
 #### Compter les points dans la grille
 ```{r cptpt}
 # liste des intersections
-(inter_g_pt <- st_intersects(grid, covdep_start))
+inter_g_pt <- st_intersects(grid, covdep_start)
+# Chaque element de la liste contient l'index des points se trouvant dans le 
+# polygone correspondant
+inter_g_pt[120:125]
 # parcourir la liste et compter le nombre d'intersections
 grid$n_pt <- sapply(inter_g_pt, length)
 
@@ -658,13 +748,15 @@ stripchart(
 La distribution de la variable est très dissymétrique à gauche. Utilisons une discrétisation basée sur une progression géométrique. 
 
 ```{r discr2}
+#| fig-width: 7
+#| fig.height: 5
 bks <- mf_get_breaks(
   x = v, 
-  nbreaks = 6, 
+  nbreaks = 8, 
   breaks = "geom"
 ) 
 cols <- mf_get_pal(
-  n = 6, 
+  n = 8, 
   palette = "SunsetDark",
   rev = TRUE
 )
@@ -674,13 +766,13 @@ x <- hist(
   breaks = bks, 
   col = cols, 
   xlab = hlab, 
-  freq = F, 
+  freq = FALSE, 
   axes = FALSE, 
   ylab = "",
   main = htitle, 
   border = "grey80", 
   lwd = 3, 
-  ylim = c(-0.01, 0.02), 
+  ylim = c(-0.02, 0.175), 
   xlim = c(0,max(v))
 )
 stripchart(
@@ -688,14 +780,14 @@ stripchart(
   pch = 21,
   bg = "grey20", 
   col = "white",
-  at = -0.005, 
-  jitter = 0.0025, 
+  at = -0.015, 
+  jitter = 0.007, 
   add = TRUE,
   method = "jitter", 
   cex = .7,
   xlab = ""
 )
-axis(side = 1, at = seq(0,round(max(v), 0),200))
+axis(side = 1, at = seq(0,round(max(v), 0),200), lwd = .5, col = "grey50")
 points(x = bks, y = rep(0, length(bks)), pch = "|")
 ```
 
